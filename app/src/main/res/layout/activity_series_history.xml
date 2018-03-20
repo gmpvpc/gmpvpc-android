@@ -31,7 +31,6 @@
         android:text="Series #1 result"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
