@@ -58,7 +58,7 @@
         app:srcCompat="@drawable/menu_statistics_icon" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/statistics_btn"
         style="@style/brownButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

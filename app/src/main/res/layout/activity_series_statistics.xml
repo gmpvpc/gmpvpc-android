@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gmpvpc.android.activities.SeriesHistory"
+    tools:context="com.gmpvpc.android.activities.SeriesStatistics"
     tools:layout_editor_absoluteY="81dp">
 
     <android.support.constraint.Guideline
@@ -144,5 +144,15 @@
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/series_statistics_horizontal_guideline_50" />
 
 </android.support.constraint.ConstraintLayout>
