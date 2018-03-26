@@ -157,8 +157,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graphView"
+        <fragment
+            android:id="@+id/graph_fragment"
+            android:name="com.gmpvpc.android.fragments.GraphFragment"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -176,7 +177,7 @@
             android:layout_marginTop="8dp"
             android:checkedButton="@+id/speed_radio_btn"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/graphView"
+            app:layout_constraintBottom_toTopOf="@+id/graph_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_accuracy_label">
