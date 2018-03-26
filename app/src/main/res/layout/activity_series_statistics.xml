@@ -1,158 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.gmpvpc.android.activities.SeriesStatistics"
-    tools:layout_editor_absoluteY="81dp">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/series_statistics_horizontal_guideline_50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50097847" />
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraint_wraper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.gmpvpc.android.activities.SeriesStatistics"
+        tools:layout_editor_absoluteY="81dp">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/series_statistics_vertical_guideline_50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        <android.support.constraint.Guideline
+            android:id="@+id/series_statistics_horizontal_guideline_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50097847" />
 
-    <TextView
-        android:id="@+id/series_statistics_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Series #1 result"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.Guideline
+            android:id="@+id/series_statistics_vertical_guideline_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-    <TextView
-        android:id="@+id/series_statistics_date_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Date"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_title" />
+        <TextView
+            android:id="@+id/series_statistics_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Series #1 result"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/series_statistics_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="1/01/1999 23:59:59.000"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_title" />
+        <TextView
+            android:id="@+id/series_statistics_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Date"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_title" />
 
-    <TextView
-        android:id="@+id/series_statistics_duration_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Duration"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_date_label" />
+        <TextView
+            android:id="@+id/series_statistics_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="1/01/1999 23:59:59.000"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_title" />
 
-    <TextView
-        android:id="@+id/series_statistics_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:text="1 minute"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_date" />
+        <TextView
+            android:id="@+id/series_statistics_duration_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Duration"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_date_label" />
 
-    <TextView
-        android:id="@+id/series_statistics_hits_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Hit counter"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_duration_label" />
+        <TextView
+            android:id="@+id/series_statistics_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="1 minute"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_date" />
 
-    <TextView
-        android:id="@+id/series_statistics_hits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="12 hits"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_duration" />
+        <TextView
+            android:id="@+id/series_statistics_hits_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Hit counter"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_duration_label" />
 
-    <TextView
-        android:id="@+id/series_statistics_avg_velocity_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Average punch velocity"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_hits_label" />
+        <TextView
+            android:id="@+id/series_statistics_hits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="12 hits"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_duration" />
 
-    <TextView
-        android:id="@+id/series_statistics_avg_velocity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="6.0 m/s"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_hits" />
+        <TextView
+            android:id="@+id/series_statistics_avg_velocity_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Average punch velocity"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_hits_label" />
 
-    <TextView
-        android:id="@+id/series_statistics_avg_accuracy_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Average punch accuracy"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity_label" />
+        <TextView
+            android:id="@+id/series_statistics_avg_velocity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="6.0 m/s"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_hits" />
 
-    <TextView
-        android:id="@+id/series_statistics_avg_acuracy_label2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="80%"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity" />
+        <TextView
+            android:id="@+id/series_statistics_avg_accuracy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Average punch accuracy"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity_label" />
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graphView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/series_statistics_horizontal_guideline_50" />
+        <TextView
+            android:id="@+id/series_statistics_avg_acuracy_label2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="80%"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_velocity" />
 
-</android.support.constraint.ConstraintLayout>
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graphView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:checkedButton="@+id/speed_radio_btn"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/graphView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/series_statistics_avg_accuracy_label">
+
+            <RadioButton
+                android:id="@+id/speed_radio_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Speed" />
+
+            <RadioButton
+                android:id="@+id/accuracy_radio_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Accuracy" />
+        </RadioGroup>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.widget.ScrollView>
