@@ -7,13 +7,13 @@ import com.gmpvpc.android.model.Series;
 
 import java.util.List;
 
+import static com.gmpvpc.android.manager.config.ApiConfig.BY_ID;
+import static com.gmpvpc.android.manager.config.ApiConfig.GET_SERIES;
+
 /**
  * Created by malah on 20/03/18.
  */
 public class SeriesManager {
-
-    public static final String GET_SERIES = "/series";
-    public static final String BY_ID = "/%s";
 
     private static final SeriesManager instance = new SeriesManager();
 
@@ -35,8 +35,7 @@ public class SeriesManager {
         this.clientManager.readAll(listener, GET_SERIES);
     }
 
-    public Series endSerie(long serieId) {
-        return null;
+    public void endSerie(long serieId) {
     }
 
 }
