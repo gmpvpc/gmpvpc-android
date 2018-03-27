@@ -148,7 +148,7 @@
         <TextView
             android:id="@+id/series_statistics_avg_acuracy_label2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:text="80%"
@@ -175,7 +175,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:checkedButton="@+id/speed_radio_btn"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/graph_fragment"
             app:layout_constraintEnd_toEndOf="parent"
