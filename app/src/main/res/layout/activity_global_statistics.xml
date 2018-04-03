@@ -6,6 +6,54 @@
     android:layout_height="match_parent"
     tools:context="com.gmpvpc.android.activities.GlobalStatisticsActivity">
 
+    <ScrollView
+        android:id="@+id/stats_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/training_history_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/global_statistics_title">
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/punch_speed"
+                android:name="com.gmpvpc.android.fragments.AchievementFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <fragment
+                android:id="@+id/punch_accuracy"
+                android:name="com.gmpvpc.android.fragments.AchievementFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <fragment
+                android:id="@+id/training_time"
+                android:name="com.gmpvpc.android.fragments.AchievementFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <fragment
+                android:id="@+id/punch_count"
+                android:name="com.gmpvpc.android.fragments.AchievementFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/global_statistics_title"
         android:layout_width="wrap_content"
@@ -29,29 +77,17 @@
         app:layout_constraintTop_toTopOf="@+id/global_statistics_title"
         app:srcCompat="@drawable/menu_statistics_icon" />
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.gmpvpc.android.fragments.AchievementFragment"
+    <Button
+        android:id="@+id/training_history_btn"
+        style="@style/brownButton"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Training history"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment2" />
-
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.gmpvpc.android.fragments.AchievementFragment"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/global_statistics_title" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

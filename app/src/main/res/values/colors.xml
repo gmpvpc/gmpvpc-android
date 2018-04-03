@@ -6,4 +6,8 @@
 
     <!-- Other colors -->
     <color name="colorBrown">#FFBF4000</color>
+    <color name="colorYellow">#FFBF7F00</color>
+    <color name="colorGrey">#FF7C7C7C</color>
+    <color name="colorMediumGrey">#FFB1B1B1</color>
+    <color name="colorLightGrey">#FFE5E5E5</color>
 </resources>
