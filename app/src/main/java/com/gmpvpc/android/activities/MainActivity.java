@@ -1,8 +1,8 @@
 package com.gmpvpc.android.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button statistics_btn = findViewById(R.id.statistics_btn);
-        statistics_btn.setOnClickListener(x -> launchActivity("SeriesStatistics"));
+        statistics_btn.setOnClickListener(x -> launchActivity("GlobalStatisticsActivity"));
 
         Button training_btn = findViewById(R.id.training_btn);
         training_btn.setOnClickListener(x -> { Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show(); });
