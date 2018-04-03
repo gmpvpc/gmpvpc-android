@@ -29,28 +29,32 @@
                 android:name="com.gmpvpc.android.fragments.AchievementFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                tools:layout="@layout/fragment_achievement"/>
 
             <fragment
                 android:id="@+id/punch_accuracy"
                 android:name="com.gmpvpc.android.fragments.AchievementFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                tools:layout="@layout/fragment_achievement"/>
 
             <fragment
                 android:id="@+id/training_time"
                 android:name="com.gmpvpc.android.fragments.AchievementFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                tools:layout="@layout/fragment_achievement"/>
 
             <fragment
                 android:id="@+id/punch_count"
                 android:name="com.gmpvpc.android.fragments.AchievementFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                tools:layout="@layout/fragment_achievement"/>
         </LinearLayout>
     </ScrollView>
 
