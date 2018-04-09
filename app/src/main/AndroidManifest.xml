@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SeriesStatistics" />
-        <activity android:name=".activities.GlobalStatisticsActivity"></activity>
+        <activity android:name=".activities.GlobalStatisticsActivity" />
+        <activity android:name=".activities.CalibrationActivity" />
     </application>
 
 </manifest>
