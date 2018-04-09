@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SeriesStatistics"></activity>
+        <activity android:name=".activities.SeriesStatistics" />
+        <activity android:name=".activities.CalibrationActivity" />
     </application>
 
 </manifest>

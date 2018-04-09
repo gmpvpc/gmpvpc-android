@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calib_title">Calibration des gants</string>
+    <string name="calib_instruction">Veuillez mettre les gants sur une table et attendre que le calibrage soit terminé.</string>
+</resources>
