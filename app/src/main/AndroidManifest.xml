@@ -19,6 +19,7 @@
         <activity android:name=".activities.SeriesStatistics" />
         <activity android:name=".activities.GlobalStatisticsActivity" />
         <activity android:name=".activities.CalibrationActivity" />
+        <activity android:name=".activities.TrainingActivity" />
     </application>
 
 </manifest>
