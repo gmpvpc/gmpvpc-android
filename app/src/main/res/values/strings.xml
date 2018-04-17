@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">GMPVPC-3000</string>
 
+    <!--CalibrationActivity-->
     <string name="calib_title">Gloves calibration</string>
     <string name="calib_instruction">Please, put the gloves on a table and wait for the calibration to finish.</string>
+
+    <!--TrainingActivity-->
+    <string name="training_title_lbl">Training</string>
+    <string name="training_start_btn">Start training</string>
+    <string name="training_stop_btn">Stop training</string>
+    <string name="training_completed_series_lbl">Completed series:</string>
+    <string name="training_completed_hits_lbl">Completed hits:</string>
+    <string name="training_list_series_title_lbl">Completed series</string>
+    <string name="training_separator">/</string>
 </resources>

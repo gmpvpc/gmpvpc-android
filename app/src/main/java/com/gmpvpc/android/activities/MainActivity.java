@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         statistics_btn.setOnClickListener(x -> launchActivity("GlobalStatisticsActivity"));
 
         Button training_btn = findViewById(R.id.training_btn);
-        training_btn.setOnClickListener(x -> { Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show(); });
+        training_btn.setOnClickListener(x -> launchActivity("TrainingActivity"));
     }
 
     public void launchActivity(String className) {

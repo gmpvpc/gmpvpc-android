@@ -12,4 +12,8 @@
         <item name="android:colorButtonNormal">#FFBF4000</item>
     </style>
 
+    <style name="greenButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">#10e570</item>
+    </style>
+
 </resources>

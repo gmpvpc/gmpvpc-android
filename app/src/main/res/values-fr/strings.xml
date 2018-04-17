@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--CalibrationActivity-->
     <string name="calib_title">Calibration des gants</string>
     <string name="calib_instruction">Veuillez mettre les gants sur une table et attendre que le calibrage soit terminé.</string>
+
+    <!--TrainingActivity-->
+    <string name="training_title_lbl">Entraînement</string>
+    <string name="training_start_btn">Lancer l\'entraînement</string>
+    <string name="training_stop_btn">Stopper l\'entraînement</string>
+    <string name="training_completed_series_lbl">Series complètées:</string>
+    <string name="training_completed_hits_lbl">Nombres de coups réalisés:</string>
+    <string name="training_list_series_title_lbl">Séries complètées</string>
+    <string name="training_separator">/</string>
 </resources>

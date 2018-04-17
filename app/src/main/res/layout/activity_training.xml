@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TrainingActivity">
+
+    <Button
+        android:id="@+id/training_stop_btn"
+        style="@style/brownButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/training_stop_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/training_guideline_middle"
+        app:layout_constraintTop_toBottomOf="@+id/training_title_lbl" />
+
+    <Button
+        android:id="@+id/training_start_btn"
+        style="@style/greenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="@string/training_start_btn"
+        app:layout_constraintEnd_toStartOf="@+id/training_guideline_middle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_title_lbl" />
+
+    <TextView
+        android:id="@+id/training_title_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/training_title_lbl"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/training_completed_series_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/training_completed_series_lbl"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_start_btn" />
+
+    <TextView
+        android:id="@+id/training_completed_hits_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/training_completed_hits_lbl"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_completed_series_lbl" />
+
+    <TextView
+        android:id="@+id/training_list_series_title_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/training_list_series_title_lbl"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_completed_hits_lbl" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/training_guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/training_completed_series_secondvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_series_separator"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <TextView
+        android:id="@+id/training_completed_series_firstvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_series_lbl"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <TextView
+        android:id="@+id/training_completed_series_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/training_separator"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_series_firstvalue"
+        tools:layout_editor_absoluteY="134dp" />
+
+    <TextView
+        android:id="@+id/training_completed_hits_firstvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_lbl"
+        app:layout_constraintTop_toBottomOf="@+id/training_completed_series_firstvalue" />
+
+    <TextView
+        android:id="@+id/training_completed_hits_secondvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_separator"
+        app:layout_constraintTop_toBottomOf="@+id/training_completed_series_secondvalue" />
+
+    <TextView
+        android:id="@+id/training_completed_hits_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/training_separator"
+        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_firstvalue"
+        app:layout_constraintTop_toBottomOf="@+id/training_completed_series_separator" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_training"
+        android:layout_width="368dp"
+        android:layout_height="269dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_list_series_title_lbl" />
+
+</android.support.constraint.ConstraintLayout>
