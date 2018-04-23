@@ -1,20 +1,18 @@
 package com.gmpvpc.android.activities;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.manager.GloveManager;
 import com.gmpvpc.android.model.Glove;
+import com.gmpvpc.android.utils.PollingAsync;
 
 import static com.gmpvpc.android.utils.ActivityUtils.launchActivity;
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class CalibrationActivity extends AppCompatActivity {
+
     private GloveManager gloveManager;
 
     @Override
@@ -31,27 +29,15 @@ public class CalibrationActivity extends AppCompatActivity {
     }
 
     public void getCalibrationStatus(long gloveId) {
-        @SuppressLint("StaticFieldLeak") AsyncTask truc = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Glove myGlove = null;
-                try {
-                    do {
-                        myGlove = CalibrationActivity.this.gloveManager.getGlove(gloveId);
-                        Thread.sleep(2000);
-                    } while (myGlove == null || !myGlove.isCalibrated());
-                    // The glove is calibrated
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        new PollingAsync(2000,
+                () -> {
+                    Glove glove = gloveManager.getGlove(gloveId);
+                    return glove.isCalibrated();
+                },
+                () -> {
+                    launchActivity(CalibrationActivity.this, TrainingActivity.class);
+                    return true;
                 }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                launchActivity(CalibrationActivity.this, TrainingActivity.class);
-            }
-        };
+        ).execute();
     }
 }
