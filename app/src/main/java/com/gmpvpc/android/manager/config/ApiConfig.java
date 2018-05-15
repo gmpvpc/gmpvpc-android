@@ -10,5 +10,7 @@ public interface ApiConfig {
     String BY_ID = "/%s";
 
     String GET_SERIES = API + "/series";
+    String GET_GLOVE = API + "/glove";
+    String CALIBRATION = API + "/calibration";
 
 }
