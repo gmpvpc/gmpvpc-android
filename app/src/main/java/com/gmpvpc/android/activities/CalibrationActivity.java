@@ -35,6 +35,7 @@ public class CalibrationActivity extends AppCompatActivity {
                     return glove.isCalibrated();
                 },
                 () -> {
+                    setResult(TrainingActivity.CALIBRATION_SUCCESS);
                     launchActivity(CalibrationActivity.this, TrainingActivity.class);
                     return true;
                 }
