@@ -5,8 +5,10 @@ import com.gmpvpc.android.manager.base.EntityListener;
 import com.gmpvpc.android.manager.client.HttpClientManager;
 import com.gmpvpc.android.model.Training;
 
+import java.util.HashMap;
+
 import static com.gmpvpc.android.manager.config.ApiConfig.BY_ID;
-import static com.gmpvpc.android.manager.config.ApiConfig.GET_TRAINING;
+import static com.gmpvpc.android.manager.config.ApiConfig.TRAINING_API;
 
 public class TrainingManager {
 
@@ -23,11 +25,15 @@ public class TrainingManager {
     }
 
     public void getCurrentTraining(long trainingId, EntityListener<Training> listener){
-        this.clientManager.readOne(listener, String.format(GET_TRAINING + BY_ID, trainingId));
+        this.clientManager.readOne(listener, String.format(TRAINING_API + BY_ID, trainingId));
     };
-    public void createTraining(Training training){
-//        this.clientManager.create(null, training);
+    public void createTraining(Training training, EntityListener<Training> listener){
+        this.clientManager.create(listener, TRAINING_API, training);
     };
+
+    public void updateTraining(long trainingId, HashMap<String, Object> attributes) {
+        this.clientManager.update(null, String.format(TRAINING_API + BY_ID, trainingId), attributes);
+    }
 
 
 }
