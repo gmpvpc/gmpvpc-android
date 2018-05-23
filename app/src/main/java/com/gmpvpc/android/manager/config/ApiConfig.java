@@ -11,4 +11,9 @@ public interface ApiConfig {
 
     String GET_SERIES = API + "/series";
 
+    String GET_GLOVE = API + "/glove";
+    String CALIBRATION = API + "/calibration";
+
+    String TRAINING_API = API + "/training";
+
 }

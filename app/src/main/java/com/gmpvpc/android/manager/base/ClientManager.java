@@ -17,4 +17,6 @@ public interface ClientManager<T> {
 
     void delete(EntityListener<T> listener, String url);
 
+    void action(String url);
+
 }
