@@ -9,6 +9,8 @@ public interface ClientManager<T> {
 
     void readOne(EntityListener<T> listener, String url);
 
+    T readOneSync(String url);
+
     void readAll(EntityListener<List<T>> listener, String url);
 
     void create(EntityListener<T> listener, String url, T data);

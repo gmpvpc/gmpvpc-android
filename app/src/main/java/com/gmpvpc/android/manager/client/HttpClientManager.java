@@ -61,6 +61,12 @@ public class HttpClientManager<T> extends ClientManagerAsync<T> {
     }
 
     @Override
+    public String put(String url) {
+        HttpPut requestBase = new HttpPut(url);
+        return execute(requestBase);
+    }
+
+    @Override
     public String delete(String url) {
         return execute(new HttpDelete(url));
     }

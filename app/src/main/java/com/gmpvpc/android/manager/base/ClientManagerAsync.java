@@ -8,18 +8,11 @@ import java.util.List;
 /**
  * Created by malah on 12/12/17.
  */
-public abstract class ClientManagerAsync<T> implements ClientManager<T> {
-
-    protected Class<T> genericType;
+public abstract class ClientManagerAsync<T> extends ClientManagerSync<T> {
 
     public ClientManagerAsync(Class<T> genericType) {
-        this.genericType = genericType;
+        super(genericType);
     }
-
-    public abstract String get(String url);
-    public abstract String post(String url, T object);
-    public abstract String put(String url, T object);
-    public abstract String delete(String url);
 
     @Override
     public void readOne(EntityListener<T> listener, String url) {
@@ -44,6 +37,11 @@ public abstract class ClientManagerAsync<T> implements ClientManager<T> {
     @Override
     public void delete(EntityListener<T> listener, String url) {
         new ClientAsyncTask<>(this, listener, genericType, TypeMethod.DELETE).execute(url);
+    }
+
+    @Override
+    public void action(String url) {
+        new ClientAsyncTask<>(this, null, genericType, TypeMethod.ACTION).execute(url);
     }
 
 }

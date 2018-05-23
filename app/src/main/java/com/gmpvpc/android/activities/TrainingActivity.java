@@ -9,16 +9,13 @@ import android.widget.Toast;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.manager.TrainingManager;
-import com.gmpvpc.android.model.Glove;
 import com.gmpvpc.android.model.Training;
 import com.gmpvpc.android.model.TrainingStatus;
-import com.gmpvpc.android.utils.BundleDictionary;
 import com.gmpvpc.android.utils.PollingAsync;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gmpvpc.android.utils.ActivityUtils.launchActivity;
 import static com.gmpvpc.android.utils.ActivityUtils.launchActivityForResult;
 
 public class TrainingActivity extends AppCompatActivity {

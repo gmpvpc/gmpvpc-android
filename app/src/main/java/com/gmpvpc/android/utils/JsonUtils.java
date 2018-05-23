@@ -38,4 +38,12 @@ public class JsonUtils {
             throw new RuntimeException(e);
         }
     }
+
+    public static <T> T parse(String json, Class<T> type) {
+        if (json != null && json.startsWith("[")) {
+            return JsonUtils.parseToList(json);
+        } else {
+            return JsonUtils.parseToObject(json, type);
+        }
+    }
 }

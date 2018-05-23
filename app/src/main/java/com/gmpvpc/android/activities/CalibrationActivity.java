@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.manager.GloveManager;
-import com.gmpvpc.android.manager.base.EntityListener;
-import com.gmpvpc.android.model.Entity;
 import com.gmpvpc.android.model.Glove;
 import com.gmpvpc.android.utils.PollingAsync;
 
-import static com.gmpvpc.android.utils.ActivityUtils.launchActivity;
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class CalibrationActivity extends AppCompatActivity {
@@ -33,11 +30,7 @@ public class CalibrationActivity extends AppCompatActivity {
     public void getCalibrationStatus(long gloveId) {
         new PollingAsync(2000,
                 () -> {
-                    Glove glove;
-                    gloveManager.getGlove(gloveId, data -> {
-                        ;
-                    });
-                    //
+                    Glove glove = gloveManager.getGloveSync(gloveId);
                     return glove.isCalibrated();
                 },
                 () -> {

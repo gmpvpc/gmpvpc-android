@@ -9,11 +9,12 @@ public interface ApiConfig {
     String API = "http://10.0.2.2:8080";
     String BY_ID = "/%s";
 
-    String GET_SERIES = API + "/series";
-
-    String GET_GLOVE = API + "/glove";
-    String CALIBRATION = API + "/calibration";
-
+    String SERIES = API + "/series";
+    String GLOVE = API + "/glove";
     String TRAINING_API = API + "/training";
+
+    String GLOVE_BY_ID = GLOVE + BY_ID;
+    String GLOVE_CALIBRATION = GLOVE_BY_ID + "/calibration";
+
 
 }

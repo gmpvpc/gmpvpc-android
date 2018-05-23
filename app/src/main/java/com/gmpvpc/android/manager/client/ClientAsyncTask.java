@@ -43,6 +43,8 @@ public class ClientAsyncTask<T, U> extends AsyncTask<String, Void, String> {
                 return clientManagerAsync.put(urls[0], object);
             case DELETE:
                 return clientManagerAsync.delete(urls[0]);
+            case ACTION:
+                return clientManagerAsync.put(urls[0]);
             default:
                 throw new RuntimeException("wrong method");
         }
