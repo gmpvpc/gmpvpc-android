@@ -4,6 +4,7 @@ import com.gmpvpc.android.manager.client.ClientAsyncTask;
 import com.gmpvpc.android.manager.client.TypeMethod;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by malah on 12/12/17.
@@ -30,8 +31,8 @@ public abstract class ClientManagerAsync<T> extends ClientManagerSync<T> {
     }
 
     @Override
-    public void update(EntityListener<T> listener, String url, T object) {
-        new ClientAsyncTask<>(this, listener, genericType, TypeMethod.UPDATE, object).execute(url);
+    public void update(EntityListener<T> listener, String url, Map<String, Object> datas) {
+        new ClientAsyncTask<>(this, listener, genericType, TypeMethod.UPDATE, datas).execute(url);
     }
 
     @Override

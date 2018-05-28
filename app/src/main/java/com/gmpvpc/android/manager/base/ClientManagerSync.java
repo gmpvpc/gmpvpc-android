@@ -1,5 +1,7 @@
 package com.gmpvpc.android.manager.base;
 
+import java.util.Map;
+
 import static com.gmpvpc.android.utils.JsonUtils.parse;
 
 public abstract class ClientManagerSync<T> implements ClientManager<T> {
@@ -14,7 +16,7 @@ public abstract class ClientManagerSync<T> implements ClientManager<T> {
 
     public abstract String post(String url, T object);
 
-    public abstract String put(String url, T object);
+    public abstract String put(String url, Map<String, Object> datas);
 
     public abstract String put(String url);
 
