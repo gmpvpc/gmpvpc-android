@@ -1,25 +1,22 @@
 package com.gmpvpc.android.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.manager.TrainingManager;
-import com.gmpvpc.android.model.Glove;
 import com.gmpvpc.android.model.Training;
 import com.gmpvpc.android.model.TrainingStatus;
-import com.gmpvpc.android.utils.BundleDictionary;
 import com.gmpvpc.android.utils.PollingAsync;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gmpvpc.android.utils.ActivityUtils.launchActivity;
-import static com.gmpvpc.android.utils.ActivityUtils.launchActivityForResult;
+import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class TrainingActivity extends AppCompatActivity {
     public static final int CALIBRATION_STATUS = 666;
@@ -43,8 +40,9 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     public void startTraining (View button) {
-        // Toast.makeText(this, "Start", Toast.LENGTH_SHORT).show();
-        launchActivityForResult(this, CalibrationActivity.class, CALIBRATION_STATUS);
+        Intent i = new Intent(this, CalibrationActivity.class);
+        i.putExtra(GLOVE_ID, 1);
+        this.startActivityForResult(i, CALIBRATION_STATUS);
     }
 
     public void stopTraining (View button) {
@@ -75,8 +73,8 @@ public class TrainingActivity extends AppCompatActivity {
     private void getTrainingPolling(){
         new PollingAsync(2000,
                 () -> {
-                    this.training = this.trainingManager.getCurrentTraining();
-                    return (this.training.getStatus() == Training.FINISHED);
+                    this.training = this.trainingManager.getCurrentTrainingSync();
+                    return this.training != null && this.training.getStatus() == TrainingStatus.FINISHED;
                 },
                 () -> {
                     Toast.makeText(this, "Training ended !", Toast.LENGTH_SHORT).show();

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * Created by malah on 12/12/17.
@@ -49,14 +50,20 @@ public class HttpClientManager<T> extends ClientManagerAsync<T> {
     }
 
     @Override
-    public String put(String url, T object) {
+    public String put(String url, Map<String, Object> datas) {
         HttpPut requestBase = new HttpPut(url);
         requestBase.setHeader("Content-type", "application/json");
         try {
-            requestBase.setEntity(new StringEntity(JsonUtils.parseToJson(object), "UTF-8"));
+            requestBase.setEntity(new StringEntity(JsonUtils.parseToJson(datas), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
+        return execute(requestBase);
+    }
+
+    @Override
+    public String put(String url) {
+        HttpPut requestBase = new HttpPut(url);
         return execute(requestBase);
     }
 

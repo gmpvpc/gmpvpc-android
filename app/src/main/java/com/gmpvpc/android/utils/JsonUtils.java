@@ -1,8 +1,10 @@
 package com.gmpvpc.android.utils;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,9 +14,12 @@ import java.util.List;
  */
 public class JsonUtils {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper()
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .findAndRegisterModules()
+            .configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
 
-    public static<T> T parseToList(String json) {
+    public static <T> T parseToList(String json) {
         try {
             return MAPPER.readValue(json, new TypeReference<List<T>>() {
             });
@@ -23,7 +28,7 @@ public class JsonUtils {
         }
     }
 
-    public static<T> T parseToObject(String json, Class<T> clazz) {
+    public static <T> T parseToObject(String json, Class<T> clazz) {
         try {
             return MAPPER.readValue(json, clazz);
         } catch (IOException e) {
@@ -37,5 +42,17 @@ public class JsonUtils {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static <T> T parse(String json, Class<T> type) {
+        System.out.println(json);
+        if (json != null && !json.equals("")) {
+            if (json.startsWith("[")) {
+                return JsonUtils.parseToList(json);
+            } else if (type != null) {
+                return JsonUtils.parseToObject(json, type);
+            }
+        }
+        return null;
     }
 }

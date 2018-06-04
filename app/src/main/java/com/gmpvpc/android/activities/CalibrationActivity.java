@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.manager.GloveManager;
-import com.gmpvpc.android.manager.base.EntityListener;
-import com.gmpvpc.android.model.Entity;
 import com.gmpvpc.android.model.Glove;
 import com.gmpvpc.android.utils.PollingAsync;
 
-import static com.gmpvpc.android.utils.ActivityUtils.launchActivity;
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class CalibrationActivity extends AppCompatActivity {
 
+    private long gloveId;
     private GloveManager gloveManager;
 
     @Override
@@ -22,7 +20,9 @@ public class CalibrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
 
-        long gloveId = savedInstanceState.getLong(GLOVE_ID);
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(GLOVE_ID)) {
+            gloveId = getIntent().getExtras().getLong(GLOVE_ID);
+        }
 
         this.gloveManager = GloveManager.getInstance();
         this.gloveManager.calibrate(gloveId);
@@ -33,11 +33,7 @@ public class CalibrationActivity extends AppCompatActivity {
     public void getCalibrationStatus(long gloveId) {
         new PollingAsync(2000,
                 () -> {
-                    Glove glove;
-                    gloveManager.getGlove(gloveId, data -> {
-                        ;
-                    });
-                    //
+                    Glove glove = gloveManager.getGloveSync(gloveId);
                     return glove.isCalibrated();
                 },
                 () -> {

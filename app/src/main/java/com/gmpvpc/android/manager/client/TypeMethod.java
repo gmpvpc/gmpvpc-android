@@ -7,5 +7,5 @@ public enum TypeMethod {
     CREATE,
     UPDATE,
     DELETE,
-    READ
+    ACTION, READ
 }

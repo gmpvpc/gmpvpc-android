@@ -8,7 +8,7 @@ import com.gmpvpc.android.model.Series;
 import java.util.List;
 
 import static com.gmpvpc.android.manager.config.ApiConfig.BY_ID;
-import static com.gmpvpc.android.manager.config.ApiConfig.GET_SERIES;
+import static com.gmpvpc.android.manager.config.ApiConfig.SERIES;
 
 /**
  * Created by malah on 20/03/18.
@@ -28,11 +28,11 @@ public class SeriesManager {
     }
 
     public void getSeries(long seriesId, EntityListener<Series> listener) {
-        this.clientManager.readOne(listener, String.format(GET_SERIES + BY_ID, seriesId));
+        this.clientManager.readOne(listener, String.format(SERIES + BY_ID, seriesId));
     }
 
     public void getAllSeries(EntityListener<List<Series>> listener) {
-        this.clientManager.readAll(listener, GET_SERIES);
+        this.clientManager.readAll(listener, SERIES);
     }
 
     public void endSerie(long serieId) {
