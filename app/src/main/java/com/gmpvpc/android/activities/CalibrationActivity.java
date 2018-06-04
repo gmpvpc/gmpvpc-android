@@ -12,6 +12,7 @@ import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class CalibrationActivity extends AppCompatActivity {
 
+    private long gloveId;
     private GloveManager gloveManager;
 
     @Override
@@ -19,7 +20,9 @@ public class CalibrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
 
-        long gloveId = savedInstanceState.getLong(GLOVE_ID);
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(GLOVE_ID)) {
+            gloveId = getIntent().getExtras().getLong(GLOVE_ID);
+        }
 
         this.gloveManager = GloveManager.getInstance();
         this.gloveManager.calibrate(gloveId);

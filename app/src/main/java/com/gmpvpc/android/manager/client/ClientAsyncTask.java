@@ -63,10 +63,12 @@ public class ClientAsyncTask<T, U> extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (result != null && result.startsWith("[")) {
-            listener.fireResponse(JsonUtils.parseToList(result));
-        } else {
-            listener.fireResponse(JsonUtils.parseToObject(result, genericType));
+        if (listener == null) {
+            return;
+        }
+        U parse = JsonUtils.parse(result, genericType);
+        if (parse != null) {
+            listener.fireResponse(parse);
         }
     }
 }
