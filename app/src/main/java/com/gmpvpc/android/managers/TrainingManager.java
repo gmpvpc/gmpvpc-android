@@ -37,7 +37,7 @@ public class TrainingManager {
         this.clientManager.create(listener, TRAINING_API, training);
     }
 
-    public void updateTraining(long trainingId, Map<String, Object> attributes) {
+    public void updateTraining(String trainingId, Map<String, Object> attributes) {
         this.clientManager.update(null, String.format(TRAINING_API + BY_ID, trainingId), attributes);
     }
 

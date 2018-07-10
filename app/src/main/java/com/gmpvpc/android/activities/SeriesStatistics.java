@@ -63,7 +63,7 @@ public class SeriesStatistics extends AppCompatActivity {
 
         this.dataType.check(RADIO_SPEED);
 
-        long seriesId = 0;
+        String seriesId = "";
         SeriesManager.getInstance().getSeries(seriesId, series -> {
             this.series = series;
             this.lblCreationDate.setText(series.getCreatedAt().toString());

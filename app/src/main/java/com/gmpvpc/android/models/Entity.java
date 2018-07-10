@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public abstract class Entity {
 
-    private long id;
+    private String id;
     private Date createdAt;
     private Date updatedAt;
 

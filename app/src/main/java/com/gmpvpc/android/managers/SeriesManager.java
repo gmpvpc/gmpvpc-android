@@ -27,7 +27,7 @@ public class SeriesManager {
         this.clientManager = new HttpClientManager<>(Series.class);
     }
 
-    public void getSeries(long seriesId, EntityListener<Series> listener) {
+    public void getSeries(String seriesId, EntityListener<Series> listener) {
         this.clientManager.readOne(listener, String.format(SERIES + BY_ID, seriesId));
     }
 
@@ -35,7 +35,7 @@ public class SeriesManager {
         this.clientManager.readAll(listener, SERIES);
     }
 
-    public void endSerie(long serieId) {
+    public void endSerie(String serieId) {
     }
 
 }

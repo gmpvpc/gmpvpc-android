@@ -26,7 +26,7 @@ public class GloveManager {
         this.clientManager.action(String.format(GLOVE_CALIBRATION, gloveId));
     }
 
-    public void getGlove(long gloveId, EntityListener<Glove> listener) {
+    public void getGlove(String gloveId, EntityListener<Glove> listener) {
         this.clientManager.readOne(listener, String.format(GLOVE_BY_ID, gloveId));
     }
 
