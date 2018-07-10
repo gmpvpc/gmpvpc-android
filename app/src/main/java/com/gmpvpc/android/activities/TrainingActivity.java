@@ -26,6 +26,7 @@ public class TrainingActivity extends AppCompatActivity {
     private TrainingManager trainingManager;
     private Training training;
     private Button startButton;
+    private Button stopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,18 @@ public class TrainingActivity extends AppCompatActivity {
 
         // do the binding
         this.startButton = findViewById(R.id.training_start_btn);
+        this.stopButton = findViewById(R.id.training_stop_btn);
 
-        // Call API to create default training
+        // disable stop button
+        this.stopButton.setEnabled(false);
+
         this.trainingManager = TrainingManager.getInstance();
-        this.trainingManager.createTraining(new Training(), training -> this.training = training);
     }
 
     public void startTraining (View button) {
+        // Call API to create default training
+        this.trainingManager.createTraining(new Training(), training -> this.training = training);
+
         Intent i = new Intent(this, CalibrationActivity.class);
         i.putExtra(GLOVE_ID, AppConfig.GLOVE_MAC_ADDR);
         this.startActivityForResult(i, CALIBRATION_STATUS);
@@ -51,7 +57,10 @@ public class TrainingActivity extends AppCompatActivity {
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("status", TrainingStatus.FINISHED);
         this.trainingManager.updateTraining(this.training.getId(), attributes);
-        Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Finished training", Toast.LENGTH_SHORT).show();
+
+        this.startButton.setEnabled(true);
+        this.stopButton.setEnabled(false);
     }
 
     @Override
@@ -61,9 +70,13 @@ public class TrainingActivity extends AppCompatActivity {
         if (requestCode == CALIBRATION_STATUS) {
             if (resultCode == CALIBRATION_SUCCESS){
                 Toast.makeText(this, "Calibration success !", Toast.LENGTH_SHORT).show();
-                this.startButton.setClickable(false);
-                // @android:style/Widget.Material.Light.Button.Small
-                // change Button background to default color
+
+                // disable start button
+                this.startButton.setEnabled(false);
+
+                // enable stop button
+                this.stopButton.setEnabled(true);
+
                 this.getTrainingPolling();
             } else {
                 Toast.makeText(this, "Calibration failed ! Try again.", Toast.LENGTH_SHORT).show();
@@ -79,6 +92,9 @@ public class TrainingActivity extends AppCompatActivity {
                 },
                 () -> {
                     Toast.makeText(this, "Training ended !", Toast.LENGTH_SHORT).show();
+
+                    this.startButton.setEnabled(true);
+                    this.stopButton.setEnabled(false);
                     return true;
                 }
         ).execute();
