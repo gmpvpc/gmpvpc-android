@@ -1,4 +1,4 @@
-package com.gmpvpc.android.manager.base;
+package com.gmpvpc.android.managers.base;
 
 import java.util.List;
 import java.util.Map;

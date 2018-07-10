@@ -1,4 +1,4 @@
-package com.gmpvpc.android.model;
+package com.gmpvpc.android.models;
 
 public enum Roles {
     

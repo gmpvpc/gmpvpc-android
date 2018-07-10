@@ -1,6 +1,6 @@
-package com.gmpvpc.android.model;
+package com.gmpvpc.android.models;
 
-import java.time.Instant;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
 public abstract class Entity {
 
     private long id;
-    private Instant creationDate;
-    private Instant updateDate;
+    private Date creationDate;
+    private Date updateDate;
 
 }

@@ -1,4 +1,4 @@
-package com.gmpvpc.android.manager.base;
+package com.gmpvpc.android.managers.base;
 
 /**
  * Created by malah on 26/03/18.

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.gmpvpc.android.R;
-import com.gmpvpc.android.manager.GloveManager;
-import com.gmpvpc.android.model.Glove;
+import com.gmpvpc.android.managers.GloveManager;
+import com.gmpvpc.android.models.Glove;
 import com.gmpvpc.android.utils.PollingAsync;
 
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;

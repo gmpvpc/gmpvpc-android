@@ -1,4 +1,4 @@
-package com.gmpvpc.android.manager;
+package com.gmpvpc.android.managers;
 
 import org.junit.Before;
 import org.junit.Test;

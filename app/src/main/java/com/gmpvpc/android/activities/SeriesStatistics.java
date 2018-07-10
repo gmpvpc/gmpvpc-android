@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.fragments.GraphFragment;
-import com.gmpvpc.android.manager.SeriesManager;
-import com.gmpvpc.android.model.Series;
+import com.gmpvpc.android.managers.SeriesManager;
+import com.gmpvpc.android.models.Series;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 

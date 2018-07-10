@@ -1,4 +1,4 @@
-package com.gmpvpc.android.manager.config;
+package com.gmpvpc.android.managers.config;
 
 /**
  * Created by malah on 27/03/18.
@@ -6,7 +6,7 @@ package com.gmpvpc.android.manager.config;
 
 public interface ApiConfig {
 
-    String API = "http://10.0.2.2:8080/api";
+    String API = "http://172.17.0.66:8080/api";
     String BY_ID = "/%s";
 
     String SERIES = API + "/series";

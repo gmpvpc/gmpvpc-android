@@ -1,15 +1,15 @@
-package com.gmpvpc.android.manager;
+package com.gmpvpc.android.managers;
 
-import com.gmpvpc.android.manager.base.ClientManager;
-import com.gmpvpc.android.manager.base.EntityListener;
-import com.gmpvpc.android.manager.client.HttpClientManager;
-import com.gmpvpc.android.model.Training;
+import com.gmpvpc.android.managers.base.ClientManager;
+import com.gmpvpc.android.managers.base.EntityListener;
+import com.gmpvpc.android.managers.client.HttpClientManager;
+import com.gmpvpc.android.models.Training;
 
 import java.util.Map;
 
-import static com.gmpvpc.android.manager.config.ApiConfig.BY_ID;
-import static com.gmpvpc.android.manager.config.ApiConfig.CURRENT_TRAINING_API;
-import static com.gmpvpc.android.manager.config.ApiConfig.TRAINING_API;
+import static com.gmpvpc.android.managers.config.ApiConfig.BY_ID;
+import static com.gmpvpc.android.managers.config.ApiConfig.CURRENT_TRAINING_API;
+import static com.gmpvpc.android.managers.config.ApiConfig.TRAINING_API;
 
 public class TrainingManager {
 

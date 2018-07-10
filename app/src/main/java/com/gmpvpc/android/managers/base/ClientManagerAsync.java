@@ -1,7 +1,7 @@
-package com.gmpvpc.android.manager.base;
+package com.gmpvpc.android.managers.base;
 
-import com.gmpvpc.android.manager.client.ClientAsyncTask;
-import com.gmpvpc.android.manager.client.TypeMethod;
+import com.gmpvpc.android.managers.client.ClientAsyncTask;
+import com.gmpvpc.android.managers.client.TypeMethod;
 
 import java.util.List;
 import java.util.Map;

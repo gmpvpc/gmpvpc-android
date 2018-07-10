@@ -1,4 +1,4 @@
-package com.gmpvpc.android.manager.client;
+package com.gmpvpc.android.managers.client;
 
 /**
  * Created by malah on 12/12/17.

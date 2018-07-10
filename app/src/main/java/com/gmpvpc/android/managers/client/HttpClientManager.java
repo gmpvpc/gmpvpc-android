@@ -1,8 +1,8 @@
-package com.gmpvpc.android.manager.client;
+package com.gmpvpc.android.managers.client;
 
 import android.support.annotation.NonNull;
 
-import com.gmpvpc.android.manager.base.ClientManagerAsync;
+import com.gmpvpc.android.managers.base.ClientManagerAsync;
 import com.gmpvpc.android.utils.JsonUtils;
 
 import org.apache.http.HttpResponse;

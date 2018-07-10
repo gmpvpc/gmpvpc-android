@@ -8,9 +8,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gmpvpc.android.R;
-import com.gmpvpc.android.manager.TrainingManager;
-import com.gmpvpc.android.model.Training;
-import com.gmpvpc.android.model.TrainingStatus;
+import com.gmpvpc.android.managers.TrainingManager;
+import com.gmpvpc.android.models.Training;
+import com.gmpvpc.android.models.TrainingStatus;
+import com.gmpvpc.android.utils.AppConfig;
 import com.gmpvpc.android.utils.PollingAsync;
 
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class TrainingActivity extends AppCompatActivity {
 
     public void startTraining (View button) {
         Intent i = new Intent(this, CalibrationActivity.class);
-        i.putExtra(GLOVE_ID, 1);
+        i.putExtra(GLOVE_ID, AppConfig.GLOVE_MAC_ADDR);
         this.startActivityForResult(i, CALIBRATION_STATUS);
     }
 

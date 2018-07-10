@@ -1,14 +1,14 @@
-package com.gmpvpc.android.manager;
+package com.gmpvpc.android.managers;
 
-import com.gmpvpc.android.manager.base.ClientManager;
-import com.gmpvpc.android.manager.base.EntityListener;
-import com.gmpvpc.android.manager.client.HttpClientManager;
-import com.gmpvpc.android.model.Series;
+import com.gmpvpc.android.managers.base.ClientManager;
+import com.gmpvpc.android.managers.base.EntityListener;
+import com.gmpvpc.android.managers.client.HttpClientManager;
+import com.gmpvpc.android.models.Series;
 
 import java.util.List;
 
-import static com.gmpvpc.android.manager.config.ApiConfig.BY_ID;
-import static com.gmpvpc.android.manager.config.ApiConfig.SERIES;
+import static com.gmpvpc.android.managers.config.ApiConfig.BY_ID;
+import static com.gmpvpc.android.managers.config.ApiConfig.SERIES;
 
 /**
  * Created by malah on 20/03/18.

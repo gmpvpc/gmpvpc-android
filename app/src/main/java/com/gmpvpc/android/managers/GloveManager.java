@@ -1,12 +1,12 @@
-package com.gmpvpc.android.manager;
+package com.gmpvpc.android.managers;
 
-import com.gmpvpc.android.manager.base.ClientManager;
-import com.gmpvpc.android.manager.base.EntityListener;
-import com.gmpvpc.android.manager.client.HttpClientManager;
-import com.gmpvpc.android.model.Glove;
+import com.gmpvpc.android.managers.base.ClientManager;
+import com.gmpvpc.android.managers.base.EntityListener;
+import com.gmpvpc.android.managers.client.HttpClientManager;
+import com.gmpvpc.android.models.Glove;
 
-import static com.gmpvpc.android.manager.config.ApiConfig.GLOVE_BY_ID;
-import static com.gmpvpc.android.manager.config.ApiConfig.GLOVE_CALIBRATION;
+import static com.gmpvpc.android.managers.config.ApiConfig.GLOVE_BY_ID;
+import static com.gmpvpc.android.managers.config.ApiConfig.GLOVE_CALIBRATION;
 
 public class GloveManager {
 
