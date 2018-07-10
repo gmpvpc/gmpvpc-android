@@ -18,7 +18,7 @@ public abstract class ClientManagerSync<T> implements ClientManager<T> {
 
     public abstract String put(String url, Map<String, Object> datas);
 
-    public abstract String put(String url);
+    public abstract String post(String url);
 
     public abstract String delete(String url);
 

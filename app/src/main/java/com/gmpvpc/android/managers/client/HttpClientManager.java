@@ -62,8 +62,8 @@ public class HttpClientManager<T> extends ClientManagerAsync<T> {
     }
 
     @Override
-    public String put(String url) {
-        HttpPut requestBase = new HttpPut(url);
+    public String post(String url) {
+        HttpPost requestBase = new HttpPost(url);
         return execute(requestBase);
     }
 

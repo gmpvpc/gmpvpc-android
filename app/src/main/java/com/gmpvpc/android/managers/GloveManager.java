@@ -22,7 +22,7 @@ public class GloveManager {
         this.clientManager = new HttpClientManager<>(Glove.class);
     }
 
-    public void calibrate(long gloveId) {
+    public void calibrate(String gloveId) {
         this.clientManager.action(String.format(GLOVE_CALIBRATION, gloveId));
     }
 
@@ -30,7 +30,7 @@ public class GloveManager {
         this.clientManager.readOne(listener, String.format(GLOVE_BY_ID, gloveId));
     }
 
-    public Glove getGloveSync(long gloveId) {
+    public Glove getGloveSync(String gloveId) {
         return this.clientManager.readOneSync(String.format(GLOVE_BY_ID, gloveId));
     }
 
