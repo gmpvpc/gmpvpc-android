@@ -66,7 +66,7 @@ public class SeriesStatistics extends AppCompatActivity {
         long seriesId = 0;
         SeriesManager.getInstance().getSeries(seriesId, series -> {
             this.series = series;
-            this.lblCreationDate.setText(series.getCreationDate().toString());
+            this.lblCreationDate.setText(series.getCreatedAt().toString());
         });
     }
 

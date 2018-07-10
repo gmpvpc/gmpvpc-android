@@ -16,7 +16,6 @@ public class JsonUtils {
 
     private static final ObjectMapper MAPPER = new ObjectMapper()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-            .findAndRegisterModules()
             .configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
 
     public static <T> T parseToList(String json) {

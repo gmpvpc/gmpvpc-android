@@ -11,7 +11,7 @@ import lombok.Data;
 public abstract class Entity {
 
     private long id;
-    private Date creationDate;
-    private Date updateDate;
+    private Date createdAt;
+    private Date updatedAt;
 
 }
