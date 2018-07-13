@@ -1,6 +1,9 @@
 package com.gmpvpc.android.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,6 +32,10 @@ public class TrainingActivity extends AppCompatActivity {
     private Button startButton;
     private Button stopButton;
 
+    private RabbitReceiver rabbitReceiver;
+
+    public static final String BROADCAST_ACTION = "AMQP.message.received";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +52,21 @@ public class TrainingActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, AMQPService.class);
         startService(intent);
+
+        this.rabbitReceiver = new RabbitReceiver();
+        this.registerMyReceiver();
+
+    }
+
+    private void registerMyReceiver() {
+        try{
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BROADCAST_ACTION);
+
+            registerReceiver(this.rabbitReceiver, intentFilter);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 
     public void startTraining (View button) {
@@ -104,4 +126,21 @@ public class TrainingActivity extends AppCompatActivity {
         ).execute();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        this.unregisterReceiver(this.rabbitReceiver);
+    }
+
+    class RabbitReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // uncomment this line if you had sent some data
+            // String data = intent.getStringExtra("data"); // data is a key specified to intent while sending broadcast
+            // Log.e(TAG, "data=="+data);
+
+            Toast.makeText(TrainingActivity.this, "Broadcast received !", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

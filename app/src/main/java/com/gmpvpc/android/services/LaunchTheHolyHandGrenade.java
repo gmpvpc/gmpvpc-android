@@ -22,6 +22,12 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
     private Connection connection;
     private Channel channel;
 
+    private Callback resultCallback;
+
+    public LaunchTheHolyHandGrenade(Callback callback){
+        this.resultCallback = callback;
+    }
+
     @Override
     protected Void doInBackground(Void... voids) {
         this.connect();
@@ -70,11 +76,16 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
 
                     String message = new String(body, "UTF-8");
                     Log.d("AMQPService", message);
+                    LaunchTheHolyHandGrenade.this.resultCallback.execute(message);
                 }
             });
             Log.d("AMQPService", "Created consumer. Waiting for message...");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public interface Callback {
+        void execute(String message);
     }
 }
