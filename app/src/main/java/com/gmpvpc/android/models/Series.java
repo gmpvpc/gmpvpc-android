@@ -10,6 +10,9 @@ import lombok.Data;
 @Data
 public class Series extends Entity {
 
-    private List<Hit> combination;
+    private List<Hit> combinations;
 
+    private int occurrence;
+
+    private int hits;
 }

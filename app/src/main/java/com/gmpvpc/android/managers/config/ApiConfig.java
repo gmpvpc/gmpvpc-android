@@ -1,12 +1,14 @@
 package com.gmpvpc.android.managers.config;
 
+import static com.gmpvpc.android.utils.AppConfig.HUB_IP;
+
 /**
  * Created by malah on 27/03/18.
  */
 
 public interface ApiConfig {
 
-    String API = "http://172.17.0.66:8080/api";
+    String API = "http://" + HUB_IP + ":8080/api";
     String BY_ID = "/%s";
 
     String SERIES = API + "/series";

@@ -25,6 +25,12 @@
         <activity android:name=".activities.GlobalStatisticsActivity" />
         <activity android:name=".activities.CalibrationActivity" />
         <activity android:name=".activities.TrainingActivity" />
+
+        <service
+            android:name=".services.AMQPService"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>

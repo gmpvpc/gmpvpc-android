@@ -1,5 +1,7 @@
 package com.gmpvpc.android.models;
 
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -10,5 +12,5 @@ public class Hit extends Entity {
 
     private int duration;
     private float velocity;
-
+    private List<Double> normals;
 }

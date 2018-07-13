@@ -11,6 +11,7 @@ import com.gmpvpc.android.R;
 import com.gmpvpc.android.managers.TrainingManager;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
+import com.gmpvpc.android.services.AMQPService;
 import com.gmpvpc.android.utils.AppConfig;
 import com.gmpvpc.android.utils.PollingAsync;
 
@@ -41,6 +42,9 @@ public class TrainingActivity extends AppCompatActivity {
         this.stopButton.setEnabled(false);
 
         this.trainingManager = TrainingManager.getInstance();
+
+        Intent intent = new Intent(this, AMQPService.class);
+        startService(intent);
     }
 
     public void startTraining (View button) {
