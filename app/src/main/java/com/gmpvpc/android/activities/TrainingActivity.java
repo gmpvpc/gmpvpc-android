@@ -21,9 +21,7 @@ import com.gmpvpc.android.utils.PollingAsync;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
@@ -151,7 +149,7 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     public void updateGraph(Hit hit){
-        DataPoint[] data = new DataPoint[hit.getNormals().size() - 1];
+        DataPoint[] data = new DataPoint[hit.getNormals().size()];
 
         for (int i = 0; i < hit.getNormals().size(); i++) {
             data[i] = new DataPoint(i, hit.getNormals().get(i));
