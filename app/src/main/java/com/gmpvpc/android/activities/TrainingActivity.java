@@ -1,7 +1,5 @@
 package com.gmpvpc.android.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -11,12 +9,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gmpvpc.android.R;
+import com.gmpvpc.android.fragments.GraphFragment;
 import com.gmpvpc.android.managers.TrainingManager;
+import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
 import com.gmpvpc.android.services.AMQPService;
+import com.gmpvpc.android.services.RabbitReceiver;
 import com.gmpvpc.android.utils.AppConfig;
 import com.gmpvpc.android.utils.PollingAsync;
+import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +31,13 @@ public class TrainingActivity extends AppCompatActivity {
 
     private TrainingManager trainingManager;
     private Training training;
+    private RabbitReceiver amqpMessageReceiver;
+
+    // layout attributes
     private Button startButton;
     private Button stopButton;
+    private GraphFragment hitFragment;
 
-    private RabbitReceiver rabbitReceiver;
 
     public static final String BROADCAST_ACTION = "AMQP.message.received";
 
@@ -44,6 +49,7 @@ public class TrainingActivity extends AppCompatActivity {
         // do the binding
         this.startButton = findViewById(R.id.training_start_btn);
         this.stopButton = findViewById(R.id.training_stop_btn);
+        this.hitFragment = (GraphFragment) getFragmentManager().findFragmentById(R.id.training_hit_graph);
 
         // disable stop button
         this.stopButton.setEnabled(false);
@@ -53,9 +59,9 @@ public class TrainingActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AMQPService.class);
         startService(intent);
 
-        this.rabbitReceiver = new RabbitReceiver();
-        this.registerMyReceiver();
+        this.amqpMessageReceiver = new RabbitReceiver(this::doTheAction);
 
+        this.registerMyReceiver();
     }
 
     private void registerMyReceiver() {
@@ -63,7 +69,7 @@ public class TrainingActivity extends AppCompatActivity {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(BROADCAST_ACTION);
 
-            registerReceiver(this.rabbitReceiver, intentFilter);
+            registerReceiver(this.amqpMessageReceiver, intentFilter);
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -117,7 +123,7 @@ public class TrainingActivity extends AppCompatActivity {
                     return this.training != null && this.training.getStatus() == TrainingStatus.FINISHED;
                 },
                 () -> {
-                    Toast.makeText(this, "Training ended !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Training ended !", Toast.LENGTH_LONG).show();
 
                     this.startButton.setEnabled(true);
                     this.stopButton.setEnabled(false);
@@ -130,17 +136,21 @@ public class TrainingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        this.unregisterReceiver(this.rabbitReceiver);
+        this.unregisterReceiver(this.amqpMessageReceiver);
     }
 
-    class RabbitReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // uncomment this line if you had sent some data
-            // String data = intent.getStringExtra("data"); // data is a key specified to intent while sending broadcast
-            // Log.e(TAG, "data=="+data);
-
-            Toast.makeText(TrainingActivity.this, "Broadcast received !", Toast.LENGTH_SHORT).show();
+    public void doTheAction(Object o){
+        if (o instanceof Hit){
+            this.updateGraph((Hit) o);
+        } else if (o instanceof Training) {
+            this.updateSeries((Training) o);
         }
+    }
+
+    public void updateGraph(Hit hit){
+    }
+
+    public void updateSeries(Training training){
+        // mise a jour des series
     }
 }

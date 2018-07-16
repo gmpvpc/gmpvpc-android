@@ -15,6 +15,8 @@ public class CalibrationActivity extends AppCompatActivity {
     private String gloveId;
     private GloveManager gloveManager;
 
+    private PollingAsync calibrationPolling;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +29,9 @@ public class CalibrationActivity extends AppCompatActivity {
         this.gloveManager = GloveManager.getInstance();
         this.gloveManager.calibrate(gloveId);
 
-        this.getCalibrationStatus(gloveId);
-    }
-
-    public void getCalibrationStatus(String gloveId) {
-        new PollingAsync(2000,
+        this.calibrationPolling = new PollingAsync(2000,
                 () -> {
-                    Glove glove = gloveManager.getGloveSync(gloveId);
+                    Glove glove = gloveManager.getGloveSync(this.gloveId);
                     return glove.isCalibrated();
                 },
                 () -> {
@@ -41,6 +39,23 @@ public class CalibrationActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
-        ).execute();
+        );
+
+        this.getCalibrationStatus();
+    }
+
+    public void getCalibrationStatus() {
+        this.calibrationPolling.execute();
+    }
+
+    public void cancelPolling(){
+        this.calibrationPolling.cancel(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        this.cancelPolling();
     }
 }

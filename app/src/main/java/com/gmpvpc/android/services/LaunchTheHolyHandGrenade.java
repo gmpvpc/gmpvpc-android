@@ -3,6 +3,7 @@ package com.gmpvpc.android.services;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.gmpvpc.android.activities.TrainingActivity;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -46,7 +47,7 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
 
         try {
             connection = factory.newConnection();
-            Log.d("AMQPService", "Connected ro RabbitMQ server");
+            Log.d("TheHolyHandGrenade", "Connected ro RabbitMQ server");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +62,7 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
             this.channel = this.connection.createChannel();
             this.channel.queueDeclare(HUB_QUEUE_NAME, false, false, false, null);
 
-            Log.d("AMQPService", "Created channel successfully");
+            Log.d("TheHolyHandGrenade", "Created channel successfully");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,17 +76,27 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
                                            AMQP.BasicProperties properties, byte[] body) throws IOException {
 
                     String message = new String(body, "UTF-8");
-                    Log.d("AMQPService", message);
-                    LaunchTheHolyHandGrenade.this.resultCallback.execute(message);
+                    Log.d("TheHolyHandGrenade", message);
+
+
+                    if (message.contains(":")) {
+                        String[] array = message.split(":", 2);
+
+                        String action = array[0];
+                        String json = array[1];
+
+                        LaunchTheHolyHandGrenade.this.resultCallback.execute(action, json);
+                    }
+
                 }
             });
-            Log.d("AMQPService", "Created consumer. Waiting for message...");
+            Log.d("TheHolyHandGrenade", "Created consumer. Waiting for message...");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public interface Callback {
-        void execute(String message);
+        void execute(String action, String message);
     }
 }
