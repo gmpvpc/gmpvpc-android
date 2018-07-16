@@ -15,10 +15,9 @@ import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
 import com.gmpvpc.android.services.AMQPService;
-import com.gmpvpc.android.services.RabbitReceiver;
+import com.gmpvpc.android.services.AMQPReceiver;
 import com.gmpvpc.android.utils.AppConfig;
 import com.gmpvpc.android.utils.PollingAsync;
-import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class TrainingActivity extends AppCompatActivity {
 
     private TrainingManager trainingManager;
     private Training training;
-    private RabbitReceiver amqpMessageReceiver;
+    private AMQPReceiver amqpMessageReceiver;
 
     // layout attributes
     private Button startButton;
@@ -59,7 +58,7 @@ public class TrainingActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AMQPService.class);
         startService(intent);
 
-        this.amqpMessageReceiver = new RabbitReceiver(this::doTheAction);
+        this.amqpMessageReceiver = new AMQPReceiver(this::doTheAction);
 
         this.registerMyReceiver();
     }

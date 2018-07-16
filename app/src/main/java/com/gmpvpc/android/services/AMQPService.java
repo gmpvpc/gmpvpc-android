@@ -5,25 +5,27 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.gmpvpc.android.activities.TrainingActivity;
-import com.gmpvpc.android.models.Training;
+import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
+
+import java.io.Serializable;
 
 public class AMQPService extends Service {
-    private LaunchTheHolyHandGrenade launchTheHolyGrenade;
+    private AMQPAsyncTask launchTheHolyGrenade;
 
     @Override
     public void onCreate() {
-        this.launchTheHolyGrenade = new LaunchTheHolyHandGrenade(this::broadcastMessage);
+        this.launchTheHolyGrenade = new AMQPAsyncTask(this::broadcastMessage);
         this.launchTheHolyGrenade.execute();
     }
 
-    private void broadcastMessage(String action, String message)
+    private void broadcastMessage(Serializable o)
     {
         try
         {
             Intent broadCastIntent = new Intent();
             broadCastIntent.setAction(TrainingActivity.BROADCAST_ACTION);
-            broadCastIntent.putExtra("action", action);
-            broadCastIntent.putExtra("message", message);
+
+            broadCastIntent.putExtra(OBJECT, o);
 
             sendBroadcast(broadCastIntent);
         }

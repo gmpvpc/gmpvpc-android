@@ -3,15 +3,21 @@ package com.gmpvpc.android.services;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.gmpvpc.android.activities.TrainingActivity;
+import com.gmpvpc.android.models.Hit;
+import com.gmpvpc.android.models.Training;
+import com.gmpvpc.android.utils.JsonUtils;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import com.rabbitmq.tools.json.JSONUtil;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.gmpvpc.android.utils.AppConfig.HUB_IP;
 import static com.gmpvpc.android.utils.AppConfig.HUB_PWD;
@@ -19,13 +25,18 @@ import static com.gmpvpc.android.utils.AppConfig.HUB_QUEUE_NAME;
 import static com.gmpvpc.android.utils.AppConfig.HUB_QUEUE_PORT;
 import static com.gmpvpc.android.utils.AppConfig.HUB_USER;
 
-public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
+public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
     private Connection connection;
     private Channel channel;
 
     private Callback resultCallback;
 
-    public LaunchTheHolyHandGrenade(Callback callback){
+    public static Map<String, Class<? extends Serializable>> DICTIONARY = new HashMap<String, Class<? extends Serializable>>(){{
+        put("hit", Hit.class);
+        put("training", Training.class);
+    }};
+
+    public AMQPAsyncTask(Callback callback){
         this.resultCallback = callback;
     }
 
@@ -82,12 +93,14 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
                     if (message.contains(":")) {
                         String[] array = message.split(":", 2);
 
-                        String action = array[0];
+                        String type = array[0];
                         String json = array[1];
 
-                        LaunchTheHolyHandGrenade.this.resultCallback.execute(action, json);
+                        if (DICTIONARY.containsKey(type)){
+                            Serializable o = (Serializable) JsonUtils.parseToObject(json, DICTIONARY.get(type));
+                            AMQPAsyncTask.this.resultCallback.execute(o);
+                        }
                     }
-
                 }
             });
             Log.d("TheHolyHandGrenade", "Created consumer. Waiting for message...");
@@ -97,6 +110,6 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
     }
 
     public interface Callback {
-        void execute(String action, String message);
+        void execute(Serializable o);
     }
 }
