@@ -58,7 +58,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
 
         try {
             connection = factory.newConnection();
-            Log.d("TheHolyHandGrenade", "Connected ro RabbitMQ server");
+            Log.d("AMQPAsyncTask", "Connected ro RabbitMQ server");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -73,7 +73,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
             this.channel = this.connection.createChannel();
             this.channel.queueDeclare(HUB_QUEUE_NAME, false, false, false, null);
 
-            Log.d("TheHolyHandGrenade", "Created channel successfully");
+            Log.d("AMQPAsyncTask", "Created channel successfully");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -87,7 +87,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
                                            AMQP.BasicProperties properties, byte[] body) throws IOException {
 
                     String message = new String(body, "UTF-8");
-                    Log.d("TheHolyHandGrenade", message);
+                    Log.d("AMQPAsyncTask", message);
 
 
                     if (message.contains(":")) {
@@ -97,13 +97,13 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
                         String json = array[1];
 
                         if (DICTIONARY.containsKey(type)){
-                            Serializable o = (Serializable) JsonUtils.parseToObject(json, DICTIONARY.get(type));
+                            Serializable o = JsonUtils.parseToObject(json, DICTIONARY.get(type));
                             AMQPAsyncTask.this.resultCallback.execute(o);
                         }
                     }
                 }
             });
-            Log.d("TheHolyHandGrenade", "Created consumer. Waiting for message...");
+            Log.d("AMQPAsyncTask", "Created consumer. Waiting for message...");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

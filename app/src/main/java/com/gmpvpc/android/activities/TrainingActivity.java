@@ -14,12 +14,16 @@ import com.gmpvpc.android.managers.TrainingManager;
 import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
-import com.gmpvpc.android.services.AMQPService;
 import com.gmpvpc.android.services.AMQPReceiver;
+import com.gmpvpc.android.services.AMQPService;
 import com.gmpvpc.android.utils.AppConfig;
 import com.gmpvpc.android.utils.PollingAsync;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
@@ -147,6 +151,16 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     public void updateGraph(Hit hit){
+        DataPoint[] data = new DataPoint[hit.getNormals().size() - 1];
+
+        for (int i = 0; i < hit.getNormals().size(); i++) {
+            data[i] = new DataPoint(i, hit.getNormals().get(i));
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(data);
+
+        this.hitFragment.getGraphView().removeAllSeries();
+        this.hitFragment.addSeries(series);
     }
 
     public void updateSeries(Training training){

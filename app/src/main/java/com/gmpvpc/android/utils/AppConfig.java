@@ -10,5 +10,6 @@ public interface AppConfig {
     String HUB_PWD = "gmpvpc";
 
     // for testing only
-    String GLOVE_MAC_ADDR = "cc78ab7e7c84";
+//    String GLOVE_MAC_ADDR = "cc78ab7e7c84";
+    String GLOVE_MAC_ADDR = "cc78ab7e8484";
 }
