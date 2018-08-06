@@ -2,7 +2,7 @@ package com.gmpvpc.android.utils;
 
 public interface AppConfig {
     // HUB parameters
-    String HUB_IP = "172.17.0.116";
+    String HUB_IP = "172.17.0.21";
     String HUB_QUEUE_NAME = "gmpvpc";
     int HUB_QUEUE_PORT = 5672;
 
@@ -10,6 +10,6 @@ public interface AppConfig {
     String HUB_PWD = "gmpvpc";
 
     // for testing only
-//    String GLOVE_MAC_ADDR = "cc78ab7e7c84";
-    String GLOVE_MAC_ADDR = "cc78ab7e8484";
+    String GLOVE_MAC_ADDR = "cc78ab7e7c84";
+//    String GLOVE_MAC_ADDR = "cc78ab7e8484";
 }

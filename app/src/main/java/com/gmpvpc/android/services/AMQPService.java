@@ -10,12 +10,12 @@ import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
 import java.io.Serializable;
 
 public class AMQPService extends Service {
-    private AMQPAsyncTask launchTheHolyGrenade;
+    private AMQPAsyncTask amqpAsyncTask;
 
     @Override
     public void onCreate() {
-        this.launchTheHolyGrenade = new AMQPAsyncTask(this::broadcastMessage);
-        this.launchTheHolyGrenade.execute();
+        this.amqpAsyncTask = new AMQPAsyncTask(this::broadcastMessage);
+        this.amqpAsyncTask.execute();
     }
 
     private void broadcastMessage(Serializable o)
@@ -42,7 +42,7 @@ public class AMQPService extends Service {
 
     @Override
     public void onDestroy() {
-        this.launchTheHolyGrenade.cancel(true);
+        this.amqpAsyncTask.cancel(true);
     }
 }
 

@@ -109,8 +109,6 @@ public class TrainingActivity extends AppCompatActivity {
 
                 // enable stop button
                 this.stopButton.setEnabled(true);
-
-                this.getTrainingPolling();
             } else {
                 Toast.makeText(this, "Calibration failed ! Try again.", Toast.LENGTH_SHORT).show();
             }
@@ -162,6 +160,8 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     public void updateSeries(Training training){
+        Toast.makeText(this, "received training", Toast.LENGTH_SHORT).show();
+        
         // mise a jour des series
     }
 }
