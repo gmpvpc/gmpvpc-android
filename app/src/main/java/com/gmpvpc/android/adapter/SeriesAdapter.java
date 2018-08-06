@@ -28,7 +28,7 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
         super(context, resource, seriesList);
         List<Series> seriess = new ArrayList<>();
         for (Series s :seriesList) {
-            if (s.getHits() == s.getOccurrence()) {
+            if (s.getHits() == s.getOccurrence() && s.getOccurrence() != 0) {
                 seriess.add(s);
             }
         }
@@ -60,10 +60,11 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
         } else {
             holder = (ViewHolder) rowView.getTag();
         }
-        String title = "Series n°" + position +1;
+        int number = position +1;
+        String title = String.format("Series n°%s",number);
         String subTitle = String.format("Hits: %s/%s", series.getHits(), series.getOccurrence());
         String sideInfo = "";
-        holder.lblNumber.setText(String.valueOf(position +1));
+        holder.lblNumber.setText(String.valueOf(number));
         holder.lblTitle.setText(title);
         holder.lblSubTitle.setText(subTitle);
         holder.lblSideInfo.setText(sideInfo);
