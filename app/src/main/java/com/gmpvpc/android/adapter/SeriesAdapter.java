@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.models.Series;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeriesAdapter extends ArrayAdapter<Series> {
@@ -25,7 +26,13 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
 
     public SeriesAdapter(@NonNull Context context, int resource, @NonNull List<Series> seriesList) {
         super(context, resource, seriesList);
-        this.seriesList = seriesList;
+        List<Series> seriess = new ArrayList<>();
+        for (Series s :seriesList) {
+            if (s.getHits() == s.getOccurrence()) {
+                seriess.add(s);
+            }
+        }
+        this.seriesList = seriess;
     }
 
     public static class ViewHolder {
@@ -53,10 +60,10 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
         } else {
             holder = (ViewHolder) rowView.getTag();
         }
-        String title = "Series n°" + series.getId();
-        String subTitle = "";
+        String title = "Series n°" + position +1;
+        String subTitle = String.format("Hits: %s/%s", series.getHits(), series.getOccurrence());
         String sideInfo = "";
-        holder.lblNumber.setText(series.getId());
+        holder.lblNumber.setText(position +1);
         holder.lblTitle.setText(title);
         holder.lblSubTitle.setText(subTitle);
         holder.lblSideInfo.setText(sideInfo);
