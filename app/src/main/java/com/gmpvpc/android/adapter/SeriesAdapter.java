@@ -63,7 +63,7 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
         String title = "Series n°" + position +1;
         String subTitle = String.format("Hits: %s/%s", series.getHits(), series.getOccurrence());
         String sideInfo = "";
-        holder.lblNumber.setText(position +1);
+        holder.lblNumber.setText(String.valueOf(position +1));
         holder.lblTitle.setText(title);
         holder.lblSubTitle.setText(subTitle);
         holder.lblSideInfo.setText(sideInfo);

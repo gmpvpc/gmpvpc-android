@@ -173,6 +173,6 @@ public class TrainingActivity extends AppCompatActivity {
         Toast.makeText(this, "received series", Toast.LENGTH_SHORT).show();
         Log.d("Training", String.format("Hit counter: %s/%s", series.getHits(), series.getOccurrence()));
         this.hitCountText.setText(String.valueOf(series.getHits()));
-        this.hitsText.setText(String.valueOf(series.getHits()));
+        this.hitsText.setText(String.valueOf(series.getOccurrence()));
     }
 }
