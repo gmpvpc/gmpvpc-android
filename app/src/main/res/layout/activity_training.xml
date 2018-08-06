@@ -108,16 +108,6 @@
         app:layout_constraintStart_toEndOf="@+id/training_completed_hits_firstvalue"
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_lbl" />
 
-    <ListView
-        android:id="@+id/completed_series_listview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/training_list_series_title_lbl" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
@@ -145,5 +135,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/training_start_btn" />
+
+    <fragment
+        android:id="@+id/series_fragment"
+        android:name="com.gmpvpc.android.fragments.SeriesFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/training_list_series_title_lbl" />
 
 </android.support.constraint.ConstraintLayout>

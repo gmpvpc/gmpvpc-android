@@ -1,0 +1,65 @@
+package com.gmpvpc.android.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.gmpvpc.android.R;
+import com.gmpvpc.android.models.Series;
+
+import java.util.List;
+
+public class SeriesAdapter extends ArrayAdapter<Series> {
+
+    private static final int ITEM = R.layout.fragment_achievement;
+    private static final int LBL_NUMBER = R.id.circle_txt;
+    private static final int LBL_TITLE = R.id.achievement_title;
+    private static final int LBL_SUB_TITLE = R.id.subtitle;
+    private static final int LBL_SIDE_INFO = R.id.side_txt;
+
+    private List<Series> seriesList;
+
+    public SeriesAdapter(@NonNull Context context, int resource, @NonNull List<Series> seriesList) {
+        super(context, resource, seriesList);
+        this.seriesList = seriesList;
+    }
+
+    public static class ViewHolder {
+        TextView lblNumber;
+        TextView lblTitle;
+        TextView lblSubTitle;
+        TextView lblSideInfo;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Series series = this.seriesList.get(position);
+        View rowView = convertView;
+        ViewHolder holder;
+        if (rowView == null) {
+            LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(ITEM, parent, false);
+            holder = new ViewHolder();
+            holder.lblNumber = rowView.findViewById(LBL_NUMBER);
+            holder.lblTitle = rowView.findViewById(LBL_TITLE);
+            holder.lblSubTitle = rowView.findViewById(LBL_SUB_TITLE);
+            holder.lblSideInfo = rowView.findViewById(LBL_SIDE_INFO);
+            rowView.setTag(holder);
+        } else {
+            holder = (ViewHolder) rowView.getTag();
+        }
+        String title = "Series n°" + series.getId();
+        String subTitle = "";
+        String sideInfo = "";
+        holder.lblNumber.setText(series.getId());
+        holder.lblTitle.setText(title);
+        holder.lblSubTitle.setText(subTitle);
+        holder.lblSideInfo.setText(sideInfo);
+        return rowView;
+    }
+}

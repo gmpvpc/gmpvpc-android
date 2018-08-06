@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.fragments.GraphFragment;
+import com.gmpvpc.android.fragments.SeriesFragment;
 import com.gmpvpc.android.managers.TrainingManager;
 import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Training;
@@ -29,6 +30,7 @@ import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 public class TrainingActivity extends AppCompatActivity {
     public static final int CALIBRATION_STATUS = 666;
     public static final int CALIBRATION_SUCCESS = 1;
+    public static final int FRG_SERIES = R.id.series_fragment;
 
     private TrainingManager trainingManager;
     private Training training;
@@ -38,6 +40,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Button startButton;
     private Button stopButton;
     private GraphFragment hitFragment;
+    private SeriesFragment seriesFragment;
 
 
     public static final String BROADCAST_ACTION = "AMQP.message.received";
@@ -51,7 +54,7 @@ public class TrainingActivity extends AppCompatActivity {
         this.startButton = findViewById(R.id.training_start_btn);
         this.stopButton = findViewById(R.id.training_stop_btn);
         this.hitFragment = (GraphFragment) getFragmentManager().findFragmentById(R.id.training_hit_graph);
-
+        this.seriesFragment = (SeriesFragment) getFragmentManager().findFragmentById(FRG_SERIES);
         // disable stop button
         this.stopButton.setEnabled(false);
 
@@ -160,8 +163,6 @@ public class TrainingActivity extends AppCompatActivity {
     }
 
     public void updateSeries(Training training){
-        Toast.makeText(this, "received training", Toast.LENGTH_SHORT).show();
-        
-        // mise a jour des series
+        seriesFragment.update(training.getSeries());
     }
 }
