@@ -12,6 +12,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.ShutdownSignalException;
 import com.rabbitmq.tools.json.JSONUtil;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
     public static Map<String, Class<? extends Serializable>> DICTIONARY = new HashMap<String, Class<? extends Serializable>>(){{
         put("hit", Hit.class);
         put("training", Training.class);
+        put("series", Training.class);
     }};
 
     public AMQPAsyncTask(Callback callback){
@@ -55,6 +57,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
         factory.setPassword(HUB_PWD);
         factory.setHost(HUB_IP);
         factory.setPort(HUB_QUEUE_PORT);
+        factory.setAutomaticRecoveryEnabled(true);
 
         try {
             connection = factory.newConnection();
@@ -72,6 +75,7 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
         try {
             this.channel = this.connection.createChannel();
             this.channel.queueDeclare(HUB_QUEUE_NAME, false, false, false, null);
+            this.channel.queuePurge(HUB_QUEUE_NAME);
 
             Log.d("AMQPAsyncTask", "Created channel successfully");
         } catch (IOException e) {
@@ -102,6 +106,13 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
                         }
                     }
                 }
+
+                @Override
+                public void handleShutdownSignal(String consumerTag, ShutdownSignalException sig) {
+                    super.handleShutdownSignal(consumerTag, sig);
+                    Log.d("AMQP SERVICE", "Queue shutdown");
+
+                }
             });
             Log.d("AMQPAsyncTask", "Created consumer. Waiting for message...");
         } catch (IOException e) {
@@ -112,4 +123,6 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void>{
     public interface Callback {
         void execute(Serializable o);
     }
+
+
 }

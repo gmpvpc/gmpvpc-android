@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmpvpc.android.R;
@@ -13,12 +15,12 @@ import com.gmpvpc.android.fragments.GraphFragment;
 import com.gmpvpc.android.fragments.SeriesFragment;
 import com.gmpvpc.android.managers.TrainingManager;
 import com.gmpvpc.android.models.Hit;
+import com.gmpvpc.android.models.Series;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
 import com.gmpvpc.android.services.AMQPReceiver;
 import com.gmpvpc.android.services.AMQPService;
 import com.gmpvpc.android.utils.AppConfig;
-import com.gmpvpc.android.utils.PollingAsync;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -41,7 +43,8 @@ public class TrainingActivity extends AppCompatActivity {
     private Button stopButton;
     private GraphFragment hitFragment;
     private SeriesFragment seriesFragment;
-
+    private TextView hitCountText;
+    private TextView hitsText;
 
     public static final String BROADCAST_ACTION = "AMQP.message.received";
 
@@ -55,6 +58,9 @@ public class TrainingActivity extends AppCompatActivity {
         this.stopButton = findViewById(R.id.training_stop_btn);
         this.hitFragment = (GraphFragment) getFragmentManager().findFragmentById(R.id.training_hit_graph);
         this.seriesFragment = (SeriesFragment) getFragmentManager().findFragmentById(FRG_SERIES);
+        this.hitCountText = findViewById(R.id.training_completed_hits_firstvalue);
+        this.hitsText = findViewById(R.id.training_completed_hits_secondvalue);
+
         // disable stop button
         this.stopButton.setEnabled(false);
 
@@ -91,7 +97,7 @@ public class TrainingActivity extends AppCompatActivity {
     public void stopTraining (View button) {
         // Add stop request here
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("status", TrainingStatus.FINISHED);
+        attributes.put("status", TrainingStatus.FINISHED.toString());
         this.trainingManager.updateTraining(this.training.getId(), attributes);
         Toast.makeText(this, "Finished training", Toast.LENGTH_SHORT).show();
 
@@ -118,22 +124,6 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
-    private void getTrainingPolling(){
-        new PollingAsync(2000,
-                () -> {
-                    this.training = this.trainingManager.getCurrentTrainingSync();
-                    return this.training != null && this.training.getStatus() == TrainingStatus.FINISHED;
-                },
-                () -> {
-                    Toast.makeText(this, "Training ended !", Toast.LENGTH_LONG).show();
-
-                    this.startButton.setEnabled(true);
-                    this.stopButton.setEnabled(false);
-                    return true;
-                }
-        ).execute();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -144,8 +134,10 @@ public class TrainingActivity extends AppCompatActivity {
     public void doTheAction(Object o){
         if (o instanceof Hit){
             this.updateGraph((Hit) o);
-        } else if (o instanceof Training) {
-            this.updateSeries((Training) o);
+        } else if (o instanceof Series) {
+            this.updateSeries((Series) o);
+        } else if(o instanceof Training) {
+            this.updateTraining((Training) o);
         }
     }
 
@@ -162,7 +154,15 @@ public class TrainingActivity extends AppCompatActivity {
         this.hitFragment.addSeries(series);
     }
 
-    public void updateSeries(Training training){
+    public void updateTraining(Training training) {
         seriesFragment.update(training.getSeries());
+    }
+
+    public void updateSeries(Series series){
+        Toast.makeText(this, "received series", Toast.LENGTH_SHORT).show();
+        this.hitCountText.setText(series.getHits());
+        this.hitsText.setText(series.getOccurrence());
+
+        // mise a jour des series
     }
 }

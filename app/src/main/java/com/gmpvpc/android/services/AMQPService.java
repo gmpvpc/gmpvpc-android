@@ -3,6 +3,7 @@ package com.gmpvpc.android.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.gmpvpc.android.activities.TrainingActivity;
 import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
@@ -43,6 +44,7 @@ public class AMQPService extends Service {
     @Override
     public void onDestroy() {
         this.amqpAsyncTask.cancel(true);
+        Log.e("AMQP SERVICE", "Service destroyed !");
     }
 }
 

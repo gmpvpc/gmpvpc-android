@@ -40,7 +40,7 @@ public class ClientAsyncTask<T, U> extends AsyncTask<String, Void, String> {
         this.listener = listener;
         this.genericType = genericType;
         this.typeMethod = typeMethod;
-        this.datas = datas;
+        this.datas = object;
     }
 
     @Override

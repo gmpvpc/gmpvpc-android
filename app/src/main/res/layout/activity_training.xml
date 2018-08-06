@@ -54,11 +54,14 @@
         android:id="@+id/training_completed_hits_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/training_completed_hits_lbl"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        tools:layout_editor_absoluteX="33dp" />
+        app:layout_constraintEnd_toStartOf="@+id/training_completed_hits_firstvalue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <TextView
         android:id="@+id/training_list_series_title_lbl"
@@ -85,27 +88,27 @@
         android:id="@+id/training_completed_hits_firstvalue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_lbl"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/training_completed_hits_separator"
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_lbl" />
 
     <TextView
         android:id="@+id/training_completed_hits_secondvalue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_separator"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        app:layout_constraintEnd_toStartOf="@+id/training_guideline_middle"
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_firstvalue" />
 
     <TextView
         android:id="@+id/training_completed_hits_separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/training_separator"
-        app:layout_constraintStart_toEndOf="@+id/training_completed_hits_firstvalue"
+        app:layout_constraintEnd_toStartOf="@+id/training_completed_hits_secondvalue"
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_lbl" />
 
     <android.support.constraint.Guideline
@@ -148,6 +151,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/training_list_series_title_lbl" />
+        app:layout_constraintTop_toBottomOf="@+id/training_list_series_title_lbl"
+        tools:layout="@layout/fragment_series" />
 
 </android.support.constraint.ConstraintLayout>
