@@ -3,6 +3,7 @@ package com.gmpvpc.android.amqp;
 import android.util.Log;
 
 import com.gmpvpc.android.models.Hit;
+import com.gmpvpc.android.models.Series;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.utils.JsonUtils;
 import com.rabbitmq.client.AMQP;
@@ -21,7 +22,7 @@ public class AMQPConsumer extends DefaultConsumer {
     private static Map<String, Class<? extends Serializable>> CLASS_MAP = new HashMap<String, Class<? extends Serializable>>() {{
         put("hit", Hit.class);
         put("training", Training.class);
-        put("series", Training.class);
+        put("series", Series.class);
     }};
 
     private Callback callback;

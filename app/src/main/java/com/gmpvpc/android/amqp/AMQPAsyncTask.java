@@ -8,6 +8,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import static com.gmpvpc.android.amqp.AMQPConsumer.Callback;
 import static com.gmpvpc.android.utils.AppConfig.HUB_IP;
@@ -46,14 +47,23 @@ public class AMQPAsyncTask extends AsyncTask<Void, Void, Void> {
 
         try {
             connection = factory.newConnection();
-            Log.d("AMQPAsyncTask", "Connected ro RabbitMQ server");
+            Log.d("AMQPAsyncTask", "Connected to RabbitMQ server");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private void disconnect() {
-
+        try {
+            if (channel.isOpen()) {
+                channel.close();
+            }
+            if (connection.isOpen()) {
+                connection.close();
+            }
+        } catch (IOException | TimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void createChannel() {
