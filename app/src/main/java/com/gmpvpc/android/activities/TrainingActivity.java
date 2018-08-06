@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.gmpvpc.android.utils.BroadcastInterface.BROADCAST_ACTION;
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class TrainingActivity extends AppCompatActivity {
@@ -45,8 +47,6 @@ public class TrainingActivity extends AppCompatActivity {
     private TextView hitCountText;
     private TextView hitsText;
 
-    public static final String BROADCAST_ACTION = "AMQP.message.received";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +57,8 @@ public class TrainingActivity extends AppCompatActivity {
         this.stopButton = findViewById(R.id.training_stop_btn);
         this.hitFragment = (GraphFragment) getFragmentManager().findFragmentById(R.id.training_hit_graph);
         this.seriesFragment = (SeriesFragment) getFragmentManager().findFragmentById(FRG_SERIES);
-        this.hitCountText = findViewById(R.id.training_completed_hits_firstvalue);
-        this.hitsText = findViewById(R.id.training_completed_hits_secondvalue);
+        this.hitCountText = findViewById(R.id.training_completed_hit_count);
+        this.hitsText = findViewById(R.id.training_completed_total_hits);
 
         // disable stop button
         this.stopButton.setEnabled(false);
@@ -70,6 +70,18 @@ public class TrainingActivity extends AppCompatActivity {
 
         this.amqpMessageReceiver = new AMQPReceiver(this::receiveCallback);
 
+        this.registerMyReceiver();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(this.amqpMessageReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         this.registerMyReceiver();
     }
 
@@ -159,7 +171,8 @@ public class TrainingActivity extends AppCompatActivity {
 
     public void updateSeries(Series series){
         Toast.makeText(this, "received series", Toast.LENGTH_SHORT).show();
-        this.hitCountText.setText(series.getHits());
-        this.hitsText.setText(series.getOccurrence());
+        Log.d("Training", String.format("Hit counter: %s/%s", series.getHits(), series.getOccurrence()));
+        this.hitCountText.setText(String.valueOf(series.getHits()));
+        this.hitsText.setText(String.valueOf(series.getHits()));
     }
 }

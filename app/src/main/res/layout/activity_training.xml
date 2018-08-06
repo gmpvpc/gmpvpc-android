@@ -59,7 +59,7 @@
         android:text="@string/training_completed_hits_lbl"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/training_completed_hits_firstvalue"
+        app:layout_constraintEnd_toStartOf="@+id/training_completed_hit_count"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
@@ -85,7 +85,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/training_completed_hits_firstvalue"
+        android:id="@+id/training_completed_hit_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -94,13 +94,13 @@
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_lbl" />
 
     <TextView
-        android:id="@+id/training_completed_hits_secondvalue"
+        android:id="@+id/training_completed_total_hits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="0"
+        android:text="N/A"
         app:layout_constraintEnd_toStartOf="@+id/training_guideline_middle"
-        app:layout_constraintTop_toTopOf="@+id/training_completed_hits_firstvalue" />
+        app:layout_constraintTop_toTopOf="@+id/training_completed_hit_count" />
 
     <TextView
         android:id="@+id/training_completed_hits_separator"
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/training_separator"
-        app:layout_constraintEnd_toStartOf="@+id/training_completed_hits_secondvalue"
+        app:layout_constraintEnd_toStartOf="@+id/training_completed_total_hits"
         app:layout_constraintTop_toTopOf="@+id/training_completed_hits_lbl" />
 
     <android.support.constraint.Guideline

@@ -2,6 +2,7 @@ package com.gmpvpc.android.amqp;
 
 import android.util.Log;
 
+import com.gmpvpc.android.models.Glove;
 import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Series;
 import com.gmpvpc.android.models.Training;
@@ -23,6 +24,7 @@ public class AMQPConsumer extends DefaultConsumer {
         put("hit", Hit.class);
         put("training", Training.class);
         put("series", Series.class);
+        put("glove", Glove.class);
     }};
 
     private Callback callback;
