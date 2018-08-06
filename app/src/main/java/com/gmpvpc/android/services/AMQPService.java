@@ -6,32 +6,28 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.gmpvpc.android.activities.TrainingActivity;
-import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
+import com.gmpvpc.android.amqp.AMQPAsyncTask;
 
 import java.io.Serializable;
 
+import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
+
 public class AMQPService extends Service {
+
     private AMQPAsyncTask amqpAsyncTask;
 
     @Override
     public void onCreate() {
         this.amqpAsyncTask = new AMQPAsyncTask(this::broadcastMessage);
-        this.amqpAsyncTask.execute();
     }
 
-    private void broadcastMessage(Serializable o)
-    {
-        try
-        {
+    private void broadcastMessage(Serializable o) {
+        try {
             Intent broadCastIntent = new Intent();
             broadCastIntent.setAction(TrainingActivity.BROADCAST_ACTION);
-
             broadCastIntent.putExtra(OBJECT, o);
-
             sendBroadcast(broadCastIntent);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

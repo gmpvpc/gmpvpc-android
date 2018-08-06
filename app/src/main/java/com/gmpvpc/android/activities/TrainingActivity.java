@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +17,7 @@ import com.gmpvpc.android.models.Hit;
 import com.gmpvpc.android.models.Series;
 import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.models.TrainingStatus;
-import com.gmpvpc.android.services.AMQPReceiver;
+import com.gmpvpc.android.amqp.AMQPReceiver;
 import com.gmpvpc.android.services.AMQPService;
 import com.gmpvpc.android.utils.AppConfig;
 import com.jjoe64.graphview.series.DataPoint;
@@ -69,7 +68,7 @@ public class TrainingActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AMQPService.class);
         startService(intent);
 
-        this.amqpMessageReceiver = new AMQPReceiver(this::doTheAction);
+        this.amqpMessageReceiver = new AMQPReceiver(this::receiveCallback);
 
         this.registerMyReceiver();
     }
@@ -131,7 +130,7 @@ public class TrainingActivity extends AppCompatActivity {
         this.unregisterReceiver(this.amqpMessageReceiver);
     }
 
-    public void doTheAction(Object o){
+    public void receiveCallback(Object o){
         if (o instanceof Hit){
             this.updateGraph((Hit) o);
         } else if (o instanceof Series) {
@@ -162,7 +161,5 @@ public class TrainingActivity extends AppCompatActivity {
         Toast.makeText(this, "received series", Toast.LENGTH_SHORT).show();
         this.hitCountText.setText(series.getHits());
         this.hitsText.setText(series.getOccurrence());
-
-        // mise a jour des series
     }
 }
