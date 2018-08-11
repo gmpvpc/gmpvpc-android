@@ -2,8 +2,13 @@ package com.gmpvpc.android.utils;
 
 public interface AppConfig {
     // HUB parameters
-//    String HUB_IP = "172.17.0.21";
-    String HUB_IP = "172.17.0.116";
+    // Gwenole's IP
+    // String HUB_IP = "172.17.0.21";
+
+    // Gautier's IPs
+    // String HUB_IP = "172.17.0.116";
+    String HUB_IP = "192.168.43.165";
+
     String HUB_QUEUE_NAME = "gmpvpc";
     int HUB_QUEUE_PORT = 5672;
 

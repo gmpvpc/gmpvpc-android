@@ -32,5 +32,8 @@ public class SeriesFragment extends Fragment {
         SeriesAdapter adapter = new SeriesAdapter(getActivity(), -1, seriess);
         lstSeries.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+//        if (adapter.getSeriesList().size() > 1){
+//            lstSeries.setSelection(adapter.getSeriesList().size() - 1);
+//        }
     }
 }

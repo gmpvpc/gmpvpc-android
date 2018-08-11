@@ -14,6 +14,9 @@ import com.gmpvpc.android.models.Series;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+
+@Getter
 public class SeriesAdapter extends ArrayAdapter<Series> {
 
     private static final int ITEM = R.layout.fragment_achievement;
@@ -45,6 +48,9 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(position >= this.seriesList.size()) {
+            return null;
+        }
         Series series = this.seriesList.get(position);
         View rowView = convertView;
         ViewHolder holder;
