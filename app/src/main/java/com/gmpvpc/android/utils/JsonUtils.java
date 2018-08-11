@@ -44,7 +44,7 @@ public class JsonUtils {
     }
 
     public static <T> T parse(String json, Class<T> type) {
-        System.out.println(json);
+        // System.out.println(json);
         if (json != null && !json.equals("")) {
             if (json.startsWith("[")) {
                 return JsonUtils.parseToList(json);

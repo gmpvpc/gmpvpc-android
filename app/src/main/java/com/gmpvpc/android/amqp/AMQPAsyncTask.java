@@ -1,31 +1,32 @@
-package com.gmpvpc.android.services;
+package com.gmpvpc.android.amqp;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
+import static com.gmpvpc.android.amqp.AMQPConsumer.Callback;
 import static com.gmpvpc.android.utils.AppConfig.HUB_IP;
 import static com.gmpvpc.android.utils.AppConfig.HUB_PWD;
 import static com.gmpvpc.android.utils.AppConfig.HUB_QUEUE_NAME;
 import static com.gmpvpc.android.utils.AppConfig.HUB_QUEUE_PORT;
 import static com.gmpvpc.android.utils.AppConfig.HUB_USER;
 
-public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
+public class AMQPAsyncTask extends AsyncTask<Void, Void, Void> {
+
     private Connection connection;
     private Channel channel;
 
-    private Callback resultCallback;
+    private Callback callback;
 
-    public LaunchTheHolyHandGrenade(Callback callback){
-        this.resultCallback = callback;
+    public AMQPAsyncTask(Callback callback) {
+        this.callback = callback;
+        execute();
     }
 
     @Override
@@ -33,35 +34,44 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
         this.connect();
         this.createChannel();
         this.configureQueue();
-
         return null;
     }
 
-    public void connect(){
+    public void connect() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername(HUB_USER);
         factory.setPassword(HUB_PWD);
         factory.setHost(HUB_IP);
         factory.setPort(HUB_QUEUE_PORT);
+        factory.setAutomaticRecoveryEnabled(true);
 
         try {
             connection = factory.newConnection();
-            Log.d("AMQPService", "Connected ro RabbitMQ server");
+            Log.d("AMQPAsyncTask", "Connected to RabbitMQ server");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private void disconnect() {
-
+        try {
+            if (channel.isOpen()) {
+                channel.close();
+            }
+            if (connection.isOpen()) {
+                connection.close();
+            }
+        } catch (IOException | TimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void createChannel() {
         try {
             this.channel = this.connection.createChannel();
             this.channel.queueDeclare(HUB_QUEUE_NAME, false, false, false, null);
-
-            Log.d("AMQPService", "Created channel successfully");
+            this.channel.queuePurge(HUB_QUEUE_NAME);
+            Log.d("AMQPAsyncTask", "Created channel successfully");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,23 +79,12 @@ public class LaunchTheHolyHandGrenade extends AsyncTask<Void, Void, Void>{
 
     private void configureQueue() {
         try {
-            this.channel.basicConsume(HUB_QUEUE_NAME, true, new DefaultConsumer(channel){
-                @Override
-                public void handleDelivery(String consumerTag, Envelope envelope,
-                                           AMQP.BasicProperties properties, byte[] body) throws IOException {
-
-                    String message = new String(body, "UTF-8");
-                    Log.d("AMQPService", message);
-                    LaunchTheHolyHandGrenade.this.resultCallback.execute(message);
-                }
-            });
-            Log.d("AMQPService", "Created consumer. Waiting for message...");
+            this.channel.basicConsume(HUB_QUEUE_NAME, true, new AMQPConsumer(this.channel, callback));
+            Log.d("AMQPAsyncTask", "Created consumer. Waiting for message...");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public interface Callback {
-        void execute(String message);
-    }
+
 }

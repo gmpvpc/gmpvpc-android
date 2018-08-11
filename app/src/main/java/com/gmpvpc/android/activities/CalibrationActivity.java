@@ -1,19 +1,28 @@
 package com.gmpvpc.android.activities;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.gmpvpc.android.R;
+import com.gmpvpc.android.amqp.AMQPReceiver;
 import com.gmpvpc.android.managers.GloveManager;
 import com.gmpvpc.android.models.Glove;
+import com.gmpvpc.android.models.Hit;
+import com.gmpvpc.android.models.Series;
+import com.gmpvpc.android.models.Training;
 import com.gmpvpc.android.utils.PollingAsync;
 
+import static com.gmpvpc.android.utils.BroadcastInterface.BROADCAST_ACTION;
 import static com.gmpvpc.android.utils.BundleDictionary.GLOVE_ID;
 
 public class CalibrationActivity extends AppCompatActivity {
 
     private String gloveId;
     private GloveManager gloveManager;
+
+    private AMQPReceiver amqpMessageReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +36,29 @@ public class CalibrationActivity extends AppCompatActivity {
         this.gloveManager = GloveManager.getInstance();
         this.gloveManager.calibrate(gloveId);
 
-        this.getCalibrationStatus(gloveId);
+        this.amqpMessageReceiver = new AMQPReceiver(this::receiveCallback);
+        this.registerMyReceiver();
     }
 
-    public void getCalibrationStatus(String gloveId) {
-        new PollingAsync(2000,
-                () -> {
-                    Glove glove = gloveManager.getGloveSync(gloveId);
-                    return glove.isCalibrated();
-                },
-                () -> {
-                    setResult(TrainingActivity.CALIBRATION_SUCCESS);
-                    finish();
-                    return true;
-                }
-        ).execute();
+    private void registerMyReceiver() {
+        try{
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BROADCAST_ACTION);
+
+            registerReceiver(this.amqpMessageReceiver, intentFilter);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public void receiveCallback(Object o){
+        Toast.makeText(this, "Did i receive something ?", Toast.LENGTH_SHORT).show();
+        if (o instanceof Glove){
+            Glove glove = (Glove) o;
+            if (glove.isCalibrated()){
+                setResult(TrainingActivity.CALIBRATION_SUCCESS);
+                finish();
+            }
+        }
     }
 }

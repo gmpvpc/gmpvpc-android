@@ -1,47 +1,40 @@
 package com.gmpvpc.android.services;
 
-import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
 
-import com.gmpvpc.android.activities.TrainingActivity;
+import com.gmpvpc.android.amqp.AMQPAsyncTask;
 
-public class AMQPService extends Service {
-    private LaunchTheHolyHandGrenade launchTheHolyGrenade;
+import java.io.Serializable;
+
+import static com.gmpvpc.android.utils.BroadcastInterface.BROADCAST_ACTION;
+import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
+
+public class AMQPService extends BaseService {
+
+    private AMQPAsyncTask amqpAsyncTask;
 
     @Override
     public void onCreate() {
-        this.launchTheHolyGrenade = new LaunchTheHolyHandGrenade(this::broadcastMessage);
-        this.launchTheHolyGrenade.execute();
+        this.amqpAsyncTask = new AMQPAsyncTask(this::broadcastMessage);
     }
 
-    private void broadcastMessage(String message)
-    {
-        try
-        {
+    private void broadcastMessage(Serializable o) {
+        try {
             Intent broadCastIntent = new Intent();
-            broadCastIntent.setAction(TrainingActivity.BROADCAST_ACTION);
-
-             // uncomment this line if you want to send data
-             // broadCastIntent.putExtra("data", "abc");
-
+            broadCastIntent.setAction(BROADCAST_ACTION);
+            broadCastIntent.putExtra(OBJECT, o);
             sendBroadcast(broadCastIntent);
-
-        }
-        catch (Exception ex)
-        {
+            Log.d("AMQP Receiver", "Broadcast sent.");
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
     public void onDestroy() {
-        this.launchTheHolyGrenade.cancel(true);
+        this.amqpAsyncTask.cancel(true);
+        Log.e("AMQP SERVICE", "Service destroyed !");
     }
 }
 

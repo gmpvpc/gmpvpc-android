@@ -12,18 +12,16 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BaseSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
+import lombok.NoArgsConstructor;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
+@NoArgsConstructor
 public class GraphFragment extends Fragment {
 
     private GraphView graphView;
-
-    public GraphFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
