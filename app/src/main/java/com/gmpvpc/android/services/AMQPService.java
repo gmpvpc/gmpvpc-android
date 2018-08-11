@@ -1,11 +1,8 @@
 package com.gmpvpc.android.services;
 
-import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
 import android.util.Log;
 
-import com.gmpvpc.android.activities.TrainingActivity;
 import com.gmpvpc.android.amqp.AMQPAsyncTask;
 
 import java.io.Serializable;
@@ -13,7 +10,7 @@ import java.io.Serializable;
 import static com.gmpvpc.android.utils.BroadcastInterface.BROADCAST_ACTION;
 import static com.gmpvpc.android.utils.BundleDictionary.OBJECT;
 
-public class AMQPService extends Service {
+public class AMQPService extends BaseService {
 
     private AMQPAsyncTask amqpAsyncTask;
 
@@ -32,11 +29,6 @@ public class AMQPService extends Service {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
     }
 
     @Override
