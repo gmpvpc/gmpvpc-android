@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.gmpvpc.android.R;
 import com.gmpvpc.android.models.Series;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
@@ -27,15 +26,9 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
 
     private List<Series> seriesList;
 
-    public SeriesAdapter(@NonNull Context context, int resource, @NonNull List<Series> seriesList) {
-        super(context, resource, seriesList);
-        List<Series> seriess = new ArrayList<>();
-        for (Series s :seriesList) {
-            if (s.getHits() == s.getOccurrence() && s.getOccurrence() != 0) {
-                seriess.add(s);
-            }
-        }
-        this.seriesList = seriess;
+    public SeriesAdapter(@NonNull Context context, @NonNull List<Series> seriesList) {
+        super(context, -1, seriesList);
+        this.seriesList = seriesList;
     }
 
     public static class ViewHolder {
@@ -48,9 +41,6 @@ public class SeriesAdapter extends ArrayAdapter<Series> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(position >= this.seriesList.size()) {
-            return null;
-        }
         Series series = this.seriesList.get(position);
         View rowView = convertView;
         ViewHolder holder;

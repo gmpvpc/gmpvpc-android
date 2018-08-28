@@ -11,6 +11,7 @@ import com.gmpvpc.android.R;
 import com.gmpvpc.android.adapter.SeriesAdapter;
 import com.gmpvpc.android.models.Series;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeriesFragment extends Fragment {
@@ -29,7 +30,13 @@ public class SeriesFragment extends Fragment {
     }
 
     public void update(List<Series> seriess) {
-        SeriesAdapter adapter = new SeriesAdapter(getActivity(), -1, seriess);
+        List<Series> seriesList = new ArrayList<>();
+        for (Series s :seriess) {
+            if (s.getHits() == s.getOccurrence() && s.getOccurrence() != 0) {
+                seriesList.add(s);
+            }
+        }
+        SeriesAdapter adapter = new SeriesAdapter(getActivity(), seriesList);
         lstSeries.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 //        if (adapter.getSeriesList().size() > 1){
